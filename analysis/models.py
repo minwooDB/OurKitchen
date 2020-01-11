@@ -8,12 +8,8 @@ class Kitchen_info(models.Model):
     image = models.CharField(max_length=20)
     capacity = models.IntegerField()
 
-# class User(models.Model):
-#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    
 class Reservation_time(models.Model):
     kitchen_name = models.ForeignKey(Kitchen_info, on_delete=models.CASCADE)
-    # user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     start_date = models.DateField()
     last_date = models.DateField()
     time = models.IntegerField()
