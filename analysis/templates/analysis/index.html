@@ -59,6 +59,7 @@
         </div>
     </header>
     {% endblock %}
+    {% include "menu.html" %}
     <div id="main">
         <div class="inner">
             <!-- Main -->
@@ -84,11 +85,10 @@
                     <option>커피점/카페</option>
                 </select>
                 <input type='submit'>
-                <!-- </form> -->
+                </form>
                 <div class="map-box">
                     <div class="folium-map" id="map_seoul"></div>
                 </div>
-
 
                 {% endblock content_content %}
                 <!-- content 내용 끝 -->
@@ -97,13 +97,17 @@
 {% block footer %}
 {% endblock footer %}
 <script>
-    // L_NO_TOUCH = false;
-    // L_DISABLE_3D = false;
+    L_NO_TOUCH = false;
+    L_DISABLE_3D = false;
 </script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/browser.min.js' %}"></script>
+<script src="{% static 'js/breakpoints.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-</script>
+
 <script>
     var obj = document.getElementById('genre');
     var obj1 = window.location.href
