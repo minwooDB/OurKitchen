@@ -1,19 +1,16 @@
-{% extends 'index.html' %}
 {% load static %}
 <!DOCTYPE html>
 <head>
 
 {% block cdn_css %}
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-<link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
-<link rel="stylesheet"
-    href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css" />
 {% endblock cdn_css %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/noscript.css' %}">
+{% endblock css %}
+
 <style>
     .inner {
         width: 100%;
@@ -41,39 +38,71 @@
     </style>
 </head>
 <body>
-    {% block content_title %}Analysis{% endblock %}
-    {% block content_explain %}공유 주방의 상권을 분석해보세요{% endblock %}
-    <!-- content 내용 -->
-    {% block content_content %}
-    <!-- <form action =   -->
-    <form action="http://127.0.0.1:8000/analysis/">
-        <select id='genre' name='genre'>
-            <option>중식</option>
-            <option>한식</option>
-            <option>양식</option>
-            <option>분식</option>
-            <option>패스트푸드점</option>
-            <option>제과제빵떡케익</option>
-            <option>커피점/카페</option>
-        </select>
-        <input type='submit'>
-    </form>
-    <div class="map-box">
-        <div class="folium-map" id="map_seoul"></div>
+{% block header %}
+<!-- Header -->
+    <header id="header">
+        <div class="inner">
+
+            <!-- Logo -->
+            <a href="{% url 'index' %}" class="logo">
+                <span class="symbol"><img src="{% static 'images/logo.svg' %}" alt="" /></span><span class="title">our
+                    kitchen</span>
+            </a>
+
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+    {% endblock %}
+    <div id="main">
+        <div class="inner">
+            <!-- Main -->
+            {% block content_header %}
+            <header>
+                <!-- <h1>공유주방 예약·분석 플랫폼</h1> -->
+                <h1>{% block content_title %}Analysis{% endblock %}</h1>
+                <p>{% block content_explain %}공유 주방의 상권을 분석해보세요{% endblock %}</p>
+            </header>
+            {% endblock %}
+
+            <!-- content 내용 -->
+            {% block content_content %}
+            <!-- <form action =   -->
+            <form action="http://127.0.0.1:8000/analysis/">
+                <select id='genre' name='genre'>
+                    <option>중식</option>
+                    <option>한식</option>
+                    <option>양식</option>
+                    <option>분식</option>
+                    <option>패스트푸드점</option>
+                    <option>제과제빵떡케익</option>
+                    <option>커피점/카페</option>
+                </select>
+                <input type='submit'>
+                <!-- </form> -->
+                <div class="map-box">
+                    <div class="folium-map" id="map_seoul"></div>
+                </div>
+
+
+                {% endblock content_content %}
+                <!-- content 내용 끝 -->
+        </div>
     </div>
-    {% endblock content_content %}
-        <!-- content 내용 끝 -->
 {% block footer %}
 {% endblock footer %}
 <script>
-    L_NO_TOUCH = false;
-    L_DISABLE_3D = false;
+    // L_NO_TOUCH = false;
+    // L_DISABLE_3D = false;
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js">
 </script>
 <script>
     var obj = document.getElementById('genre');
