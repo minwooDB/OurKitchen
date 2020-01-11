@@ -21,7 +21,7 @@ def kitchen_map(request):
         name.append(kitchen.kitchen_name)
         lng.append(kitchen.lng)
         lat.append(kitchen.lat)
-    return render(request, 'analysis/map.html', {'name': name, "lng": lng, "lat": lat})
+    return render(request, 'analysis/index.html', {'name': name, "lng": lng, "lat": lat})
 
 
 # 맵 생성
