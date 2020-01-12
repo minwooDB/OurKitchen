@@ -58,8 +58,10 @@
 
         <!-- scripts -->
         <!-- 자바스크립트 cdn -->
-        {% block cdn_js %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <!-- Twitter Bootstrap -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        {% block cdn_js %}
         <script>
             window.jQuery || document.write('<script src="{{ STATIC_URL }}js/libs/jquery-2.1.1.min.js"><\/script>')
         </script>
@@ -67,8 +69,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
             integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
         </script>
-        <!-- Twitter Bootstrap -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <!-- Bootstrap4 -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
@@ -77,12 +77,12 @@
 
         <!-- scripts concatenated and minified via django-compressor -->
         {% compress js %}
-        {% block js %}
         <script src="{% static 'js/jquery.min.js' %}"></script>
         <script src="{% static 'js/browser.min.js' %}"></script>
         <script src="{% static 'js/breakpoints.min.js' %}"></script>
         <script src="{% static 'js/main.js' %}"></script>
         <script src="{% static 'js/util.js' %}"></script>
+        {% block js %}
         {% endblock js %}
         {% endcompress %}
         <!-- end scripts -->

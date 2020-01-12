@@ -1,728 +1,89 @@
+{% extends 'index.html' %}
 {% load static %}
 <!DOCTYPE html>
 
-<head>
-    <script>
-        L_NO_TOUCH = false;
-        L_DISABLE_3D = false;
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js">
-    </script>
-
     {% block cdn_css %}
-    
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
-    <link rel="stylesheet"
-        href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css" />
     {% endblock cdn_css %}
 
     {% block css %}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'css/noscript.css' %}">
     <link rel="stylesheet" href="{% static 'css/map.css' %}">
     {% endblock css %}
-</head>
-
 <body>
-    {% block header %}
-    <!-- Header -->
-    <header id="header">
-        <div class="inner">
 
-            <!-- Logo -->
-            <a href="{% url 'index' %}" class="logo">
-                <span class="symbol"><img src="{% static 'images/logo.svg' %}" alt="" /></span><span class="title">our
-                    kitchen</span>
-            </a>
+    {% block content_title %}Analysis{% endblock %}
+    {% block content_explain %}공유 주방의 상권을 분석해보세요{% endblock %}
 
-            <!-- Nav -->
-            <nav>
-                <ul>
-                    <li><a href="#menu">Menu</a></li>
-                </ul>
-            </nav>
-
+    {% block content_content %}
+        <div class="map-box">
+            <div class="folium-map" id="map_analysis"></div>
         </div>
-    </header>
-    {% endblock %}
-    {% include "menu.html" %}
-    <div id="main">
-        <div class="inner">
-            <!-- Main -->
-            {% block content_header %}
-            <header>
-                <!-- <h1>공유주방 예약·분석 플랫폼</h1> -->
-                <h1>{% block content_title %}Analysis{% endblock %}</h1>
-                <p>{% block content_explain %}공유 주방의 상권을 분석해보세요{% endblock %}</p>
-            </header>
-            {% endblock %}
+        {% include 'analysis/myCharts.html' %}
 
-            <div class="map-box">
-                <div class="folium-map" id="map_analysis"></div>
-            </div>
+    {% endblock content_content %}
+
 </body>
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/browser.min.js' %}"></script>
-<script src="{% static 'js/breakpoints.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
 
-<script type="text/javascript">    
-            var result2 = "{{ result2 }}"
-            var lat = "{{ lat }}"
-            var lng = "{{ lng }}"
-            var map_analysis = L.map(
-                "map_analysis",
-                {
-                    center: [ lat , lng ],
-                    crs: L.CRS.EPSG3857,
-                    zoom: 16,
-                    zoomControl: true,
-                    preferCanvas: false,
-                }
-            );
-
-            var tile_layer_a8226ee1b87a449d989db1430247f5c0 = L.tileLayer(
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_analysis);
-           
-        
-            var storeId = "{{ store_id }}".replace(/&#39;/gi, '')
-            var storeCode = "{{ store_code }}".replace(/&#39;/gi, '"')
-            var storeLat = "{{ store_lat }}".replace(/&#39;/gi, '')
-            var storeLon = "{{ store_lon }}".replace(/&#39;/gi, '')           
-            storeId = JSON.parse(storeId)
-            storeCode = JSON.parse(storeCode)
-            storeLat = JSON.parse(storeLat)
-            storeLon = JSON.parse(storeLon)
-            
-            for (var i = 0; i < storeId.length ; i++) 
-                {
-                var marker_store_id = L.marker([storeLat[i], storeLon[i]], {}).addTo(map_analysis);
-                var popup_store_id = L.popup({"maxWidth": "100%"});
-                var html_store_id = $(`<div id='${storeId[i]}' style="width: 100.0%; height: 100.0%;">${storeCode[i]}</div>`)[0];
-                popup_store_id.setContent(html_store_id);
-                marker_store_id.bindPopup(popup_store_id)
-                ;
-                }
-                // var freq = list()
-                // for (var i = 0; i < word_counter.length ; i++) 
-                // {
-                // var marker_store_id = word_counter.
-                // var popup_store_id = L.popup({"maxWidth": "100%"});
-                // var html_store_id = $(`<div id='${storeId[i]}' style="width: 100.0%; height: 100.0%;">${storeCode[i]}</div>`)[0];
-                // popup_store_id.setContent(html_store_id);
-                // marker_store_id.bindPopup(popup_store_id)
-                // ;
-                // }
-               
-            
-</script>
-<script>    
-            var sales_info = "{{sales_info}}".replace(/dict_values\(/gi,'').replace(/&#39;/gi,'').replace(/\'/gi,'\"').replace(/\,/gi,'\","').replace(/\[/gi,'\["').replace(/\]/gi,'\"]').replace(/\)/gi,'');
-            var stay_info = "{{stay_info}}".replace(/dict_values\(/gi,'').replace(/&#39;/gi,'').replace(/\'/gi,'\"').replace(/\,/gi,'\","').replace(/\[/gi,'\["').replace(/\]/gi,'\"]').replace(/\)/gi,'');
-            var move_info = "{{move_info}}".replace(/dict_values\(/gi,'').replace(/&#39;/gi,'').replace(/\'/gi,'\"').replace(/\,/gi,'\","').replace(/\[/gi,'\["').replace(/\]/gi,'\"]').replace(/\)/gi,''); 
-            var pie_values = "{{pie_values}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\)/gi, '');
-            // var pie_keys = "{{pie_keys}}".replace(/dict_keys\(/gi, '').replace(/&#39;/gi, '').replace(/\)/gi, '');
-            var pie_keys = "{{pie_keys}}".replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi,'\","').replace(/\[/gi,'\["').replace(/\]/gi,'\"]');
-            var remain_Term = "{{remain_term}}".replace(/&#39;/gi, '')
-            var plma = "{{plma}}".replace(/&#39;/gi, '')
-            var danger = "{{danger}}".replace(/&#39;/gi, '')
-            var close = "{{close}}".replace(/&#39;/gi, '')
-            sales_info = JSON.parse(sales_info)
-            stay_info = JSON.parse(stay_info)
-            move_info = JSON.parse(move_info)
-            pie_values = JSON.parse(pie_values)
-            pie_keys = JSON.parse(pie_keys)
-            close = JSON.parse(close)
-            remain_Term = JSON.parse(remain_Term)
-            plma = JSON.parse(plma)
-            // danger = JSON.parse(danger)
-</script>
-
+{% block cdn_js %}
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<!-- style="width:3000px; height:300px; -->
-<!-- <div class="container">
-    
-    
-    
-    <canvas class="item" id="myChart4"></canvas>
-    <canvas class="item" id="myChart5"></canvas>
-    <canvas class="item" id="myChart6"></canvas>
-    <canvas class="item" id="myChart7"></canvas>
-</div> -->
-<ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" href="#chart1" data-toggle="tab">창업지수</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#chart2" data-toggle="tab">인근점포현황</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#chart3" data-toggle="tab">상주/직장인구 현황</a>
-        </li>
-        <li class="nav-item">
-         <a class="nav-link" href="#chart4" data-toggle="tab">성별 상권 매출비율</a>
-        </li>
-        <li class="nav-item">
-         <a class="nav-link" href="#chart5" data-toggle="tab">시간대별 상권 매출비율</a>
-        </li>
-        <li class="nav-item">
-         <a class="nav-link" href="#chart6" data-toggle="tab"> 주중/주말 매출 비율</a>
-        </li>
-        <li class="nav-item">
-         <a class="nav-link" href="#chart7" data-toggle="tab">매출 비율</a>
-        </li>
-      </ul>
-
-      <div class="tab-content" id="myTabContent" >
-        <div class="tab-pane fade" id="chart1" >
-        <canvas class="item" id="myChart"></canvas>
-        </div>
-        <div class="tab-pane fade" id="chart2">
-        <canvas class="item" id="myChart2"></canvas>
-        </div>
-        <div class="tab-pane fade" id="chart3">
-        <canvas class="item" id="myChart3"></canvas>
-        </div>
-        <div class="tab-pane fade" id="chart4">
-        <canvas class="item" id="myChart4"></canvas>
-        </div>
-        <div class="tab-pane fade" id="chart5">
-        <canvas class="item" id="myChart5"></canvas>
-        </div>
-        <div class="tab-pane fade" id="chart6">
-        <canvas class="item" id="myChart6"></canvas>
-        </div>
-        <div class="tab-pane fade" id="chart7">
-        <canvas class="item" id="myChart7"></canvas>
-        </div>
-      </div>
 <script>
-
-// 우선 컨텍스트를 가져옵니다. 
-var ctx = document.getElementById("myChart").getContext('2d');
-var ctx2 = document.getElementById("myChart2").getContext('2d');
-var ctx3 = document.getElementById("myChart3").getContext('2d');
-var ctx4 = document.getElementById("myChart4").getContext('2d');
-var ctx5 = document.getElementById("myChart5").getContext('2d');
-var ctx6 = document.getElementById("myChart6").getContext('2d');
-var ctx7 = document.getElementById("myChart7").getContext('2d');
-
-/*
-- Chart를 생성하면서, 
-- ctx를 첫번째 argument로 넘겨주고, 
-- 두번째 argument로 그림을 그릴때 필요한 요소들을 모두 넘겨줍니다. 
-*/
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ["폐업신고율", "평균 폐업기간(년)", "평균 매장 증감율(년)"],
-        datasets: [{
-            label: danger,
-            data: [close, remain_Term, plma],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        tooltips: {
-            titleFontSize: 30,
-            bodyFontSize: 30
-        },
-        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }]
-        },
-    }});
-    console.log(move_info)
-    console.log(pie_values)
-    console.log(stay_info[2])
-    var myChart2 = new Chart(ctx2, {
-    type: 'pie',
-
-    data: {
-        labels: pie_keys,
-        datasets: [{
-            data: pie_values,
-            backgroundColor: [
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-            ],
-            borderColor: [
-            'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }
-        ]
-    },
-    options: {
-        tooltips: {
-            titleFontSize: 30,
-            bodyFontSize: 30
-        },
-        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }]
-        },
-    }});
-
-    var myChart3 = new Chart(ctx3, {
-    type: 'bar',
-    data: {
-        labels: ['총상주/직장인구', '남성_total', '여성_total', '20대_total', '30대_total', '40대_total', '50대_total', '60대_total', '남성_20', '남성_30', '남성_40', '남성_50', '남성_60', '여성_20', '여성_30', '여성_40', '여성_50', '여성_60'],
-        datasets: [{
-            label: '상주인구',
-            data: [stay_info[2],stay_info[3],stay_info[4],stay_info[5],stay_info[6],stay_info[7],stay_info[8],stay_info[9],stay_info[10],stay_info[11],stay_info[12],stay_info[13],stay_info[14],stay_info[15],stay_info[16],stay_info[17],stay_info[18],stay_info[19]],
-            backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        },
+    L_NO_TOUCH = false;
+    L_DISABLE_3D = false;
+    var result2 = "{{ result2 }}"
+    var lat = "{{ lat }}"
+    var lng = "{{ lng }}"
+    var map_analysis = L.map(
+        "map_analysis",
         {
-            label: '직장인구',
-            data:  [move_info[2],move_info[3],move_info[4],move_info[5],move_info[6],move_info[7],move_info[8],move_info[9],move_info[10],move_info[11],move_info[12],move_info[13],move_info[14],move_info[15],move_info[16],move_info[17],move_info[18],move_info[19]],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+            center: [lat, lng],
+            crs: L.CRS.EPSG3857,
+            zoom: 16,
+            zoomControl: true,
+            preferCanvas: false,
         }
-        ]
-    }, 
-    options: {
-        tooltips: {
-            titleFontSize: 30,
-            bodyFontSize: 30
-        },
-        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontSize: 30,
-                    beginAtZero:true
-                }
-            }]
-        },
-    }});
-    console.log(sales_info[3])
-    console.log(sales_info)
-    var myChart4 = new Chart(ctx4, {
-    type: 'pie',
-    data: {
-        labels: ["남성", "여성"],
-        datasets: [{
-            label: sales_info[1]+ '의' + sales_info[2] + '매출 남/녀 비율',
-            data: [sales_info[12],sales_info[13]],
-            backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)'
-            ],
-            borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        tooltips: {
-            titleFontSize: 30,
-            bodyFontSize: 30
-        },
-        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontSize: 30,
-                    beginAtZero:true
-                }
-            }]
-        },
-    }});
-    var myChart5 = new Chart(ctx5, 
-    {
-    type: 'pie',
-    data: {
-        labels: ["아침(06:00 - 11:00)", "점심 시간대(11:00 - 17:00)", "저녁 및 야식 시간대(17:00 - 06:00)"],
-        datasets: [{
-            label: "구간별 매출 비율",
-            data: [sales_info[9],sales_info[10],sales_info[11]],
-            backgroundColor: [
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(153, 102, 255, 1)'
-            ],
-            borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        tooltips: {
-            titleFontSize: 30,
-            bodyFontSize: 30
-        },
-        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }]
-        },
-    }});
-    var myChart6 = new Chart(ctx6, {
-    type: 'pie',
-    data: {
-        labels: ["주중", "주말"],
-        datasets: [{
-            label: "주중/말 매출 비율",
-            data: [sales_info[5],sales_info[6]],
-            backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)'
-            ],
-            borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        tooltips: {
-            titleFontSize: 30,
-            bodyFontSize: 30
-        },
-        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }]
-        },
-    }});
-    var myChart7 = new Chart(ctx7, {
-    type: 'bar',
-    data: {
-        labels: ['월 매출', '월 매출 건수'],
-        datasets: [{
-            label: '건당 평균 매출:' + sales_info[3]/sales_info[4],
-            data: [sales_info[3],stay_info[4]],
-            backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)'
-            ],
-            borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)'
-            ],
-            borderWidth: 1
-        }
-        ]
-    }, 
-    options: {
-        tooltips: {
-            titleFontSize: 30,
-            bodyFontSize: 30
-        },
-        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-        scales: {
-            yAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    fontSize: 25,
-                    beginAtZero:true
-                }
-            }]
-        },
-    }});
-    var myChart5 = new Chart(ctx5, 
-    {
-    type: 'pie',
-    data: {
-        labels: ["아침(06:00 - 11:00)", "점심 시간대(11:00 - 17:00)", "저녁 및 야식 시간대(17:00 - 06:00)"],
-        datasets: [{
-            label: "구간별 매출 비율",
-            data: [sales_info[9],sales_info[10],sales_info[11]],
-            backgroundColor: [
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(153, 102, 255, 1)'
-            ],
-            borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        tooltips: {
-            titleFontSize: 30,
-            bodyFontSize: 30
-        },
-        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        },
-    }});
-    var myChart6 = new Chart(ctx6, {
-    type: 'pie',
-    data: {
-        labels: ["주중", "주말"],
-        datasets: [{
-            label: "주중/말 매출 비율",
-            data: [sales_info[5],sales_info[6]],
-            backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)'
-            ],
-            borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        tooltips: {
-            titleFontSize: 30,
-            bodyFontSize: 30
-        },
-        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        },
-    }});
-    var myChart7 = new Chart(ctx7, {
-    type: 'bar',
-    data: {
-        labels: ['월 매출', '월 매출 건수'],
-        datasets: [{
-            label: '건당 평균 매출:' + sales_info[3]/sales_info[4],
-            data: [sales_info[3],stay_info[4]],
-            backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)'
-            ],
-            borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)'
-            ],
-            borderWidth: 1
-        }
-        ]
-    }, 
-    options: {
-        tooltips: {
-            titleFontSize: 30,
-            bodyFontSize: 30
-        },
-        maintainAspectRatio: true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        },
-    }});
+    );
+
+    var tile_layer_a8226ee1b87a449d989db1430247f5c0 = L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        { "attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false }
+    ).addTo(map_analysis);
+
+    var storeId = "{{ store_id }}".replace(/&#39;/gi, '')
+    var storeCode = "{{ store_code }}".replace(/&#39;/gi, '"')
+    var storeLat = "{{ store_lat }}".replace(/&#39;/gi, '')
+    var storeLon = "{{ store_lon }}".replace(/&#39;/gi, '')
+    storeId = JSON.parse(storeId)
+    storeCode = JSON.parse(storeCode)
+    storeLat = JSON.parse(storeLat)
+    storeLon = JSON.parse(storeLon)
+
+    for (var i = 0; i < storeId.length; i++) {
+        var marker_store_id = L.marker([storeLat[i], storeLon[i]], {}).addTo(map_analysis);
+        var popup_store_id = L.popup({ "maxWidth": "100%" });
+        var html_store_id = $(`<div id='${storeId[i]}' style="width: 100.0%; height: 100.0%;">${storeCode[i]}</div>`)[0];
+        popup_store_id.setContent(html_store_id);
+        marker_store_id.bindPopup(popup_store_id);
+    }
+    var sales_info = "{{sales_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
+    var stay_info = "{{stay_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
+    var move_info = "{{move_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
+    var pie_values = "{{pie_values}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\)/gi, '');
+    var pie_keys = "{{pie_keys}}".replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]');
+    var remain_Term = "{{remain_term}}".replace(/&#39;/gi, '')
+    var plma = "{{plma}}".replace(/&#39;/gi, '')
+    var danger = "{{danger}}".replace(/&#39;/gi, '')
+    var close = "{{close}}".replace(/&#39;/gi, '')
+    sales_info = JSON.parse(sales_info)
+    stay_info = JSON.parse(stay_info)
+    move_info = JSON.parse(move_info)
+    pie_values = JSON.parse(pie_values)
+    pie_keys = JSON.parse(pie_keys)
+    close = JSON.parse(close)
+    remain_Term = JSON.parse(remain_Term)
+    plma = JSON.parse(plma)
 </script>
+{% endblock cdn_js %}
+{% block js %}
+    <script src="{% static 'js/myCharts.js' %}"></script>
+{% endblock js %}
