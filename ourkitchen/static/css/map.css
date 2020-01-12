@@ -1,0 +1,31 @@
+.inner {
+    width: 100%;
+    max-width: 68em;
+    margin: 0 auto;
+    padding: 0 2.5em;
+}
+
+.map-box {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    margin: 0 auto;
+    background: pink;
+}
+
+#map_seoul {
+    position: relative;
+    width: 100.0%;
+    height: 100.0%;
+    left: 0.0%;
+    top: 0.0%;
+    
+}
+
+#map_analysis {
+    position: relative;
+    width: 100.0%;
+    height: 100.0%;
+    left: 0.0%;
+    top: 0.0%;
+}
