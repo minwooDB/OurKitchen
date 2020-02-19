@@ -30,7 +30,8 @@ class Reservation(models.Model):
     def check_overlap_date(self, existed_start, existed_end, new_start, new_end):
         overlap = True
         if existed_end < new_start:
-            overlap = False
+            overlap = False 
+            
         if new_end < existed_start:
             overlap = False
         return overlap
