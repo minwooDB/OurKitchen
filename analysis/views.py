@@ -15,13 +15,15 @@ token = config('TOKEN')
 def kitchen_map(request):
     kitchens = Kitchen_info.objects.all()
     name = list()
+    pk = list()
     lng = list()
     lat = list()
     for kitchen in kitchens:
         name.append(kitchen.kitchen_name)
+        pk.append(kitchen.pk)
         lng.append(kitchen.lng)
         lat.append(kitchen.lat)
-    return render(request, 'analysis/index.html', {'name': name, "lng": lng, "lat": lat})
+    return render(request, 'analysis/index.html', {'name': name, "lng": lng, "lat": lat, "pk": pk})
 
 
 # 맵 생성
