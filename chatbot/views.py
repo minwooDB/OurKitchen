@@ -48,6 +48,7 @@ def webhook(request):
 
 @login_required
 def mypage(request):
+    reservatoins = Reservation.objects.all()
     consultings = Consulting.objects.all()
     reservations = Reservation.objects.all()
     return render(request,'chatbot/mypage.html',{'reservations':reservations,'consultings':consultings})
