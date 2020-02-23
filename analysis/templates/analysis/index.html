@@ -11,7 +11,7 @@
 {% endblock css %}
 
 <body>
-    {% block content_title %}Analysis{% endblock %}
+    {% block content_title %}Analysis & Reservation{% endblock %}
     {% block content_explain %}공유 주방의 상권을 분석해보세요{% endblock %}
 
     <!-- content 내용 -->
@@ -73,16 +73,22 @@
         var storeName = "{{ name }}".replace(/&#39;/gi, '"')
         var storeLat = "{{ lat }}".replace(/&#39;/gi, '')
         var storeLon = "{{ lng }}".replace(/&#39;/gi, '')
+        var pk = "{{ pk }}".replace(/&#39;/gi, '')
         storeName = JSON.parse(storeName)
         storeLat = JSON.parse(storeLat)
         storeLon = JSON.parse(storeLon)
+        pk = JSON.parse(pk)
         for (var i = 0; i < storeName.length; i++) {
             var marker_store_id = L.marker([storeLat[i], storeLon[i]], {}).addTo(map_seoul);
             var popup_store_id = L.popup({
-                "maxWidth": "100%"
+                "maxWidth": "1000px"
             });
             var html_store_id = $(
-                `<div <div onclick="location.href='http://127.0.0.1:8000/analysis/${storeLat[i]}/${storeLon[i]}/${genre}'"  id='${storeName[i]}' style="width: 100.0%; height: 100.0%;">${storeName[i]}</div>`
+                 
+                `<div>
+                 <button <div onclick="location.href='http://127.0.0.1:8000/analysis/${storeLat[i]}/${storeLon[i]}/${genre}'"  id='${storeName[i]}' style="width: 200px; height: 50px;">${storeName[i]} 상권분석</button>
+                 <button <div type ="button" onclick="location.href='http://127.0.0.1:8000/reserve/${pk[i]}'"  id='${pk[i]}' style="width: 200px; height: 50px;">${storeName[i]} 예약하기</button>
+                 </div>`
             )[0];
             popup_store_id.setContent(html_store_id);
             marker_store_id.bindPopup(popup_store_id);
