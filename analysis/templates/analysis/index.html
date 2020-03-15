@@ -4,7 +4,8 @@
 
 {% block cdn_css %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha384-BF7C732iE6WuqJMhUnTNJJLVvW1TIP87P2nMDY7aN2j2EJFWIaqK89j3WlirhFZU" crossorigin="" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+    integrity="sha384-BF7C732iE6WuqJMhUnTNJJLVvW1TIP87P2nMDY7aN2j2EJFWIaqK89j3WlirhFZU" crossorigin="" />
 {% endblock cdn_css %}
 
 {% block css %}
@@ -18,7 +19,7 @@
     <!-- content 내용 -->
     {% block content_content %}
     <!-- <form action =   -->
-    <form action="">
+    <!-- <form action="">
         <select id='genre' name='genre'>
             <option>중식</option>
             <option>한식</option>
@@ -29,7 +30,7 @@
             <option>커피점/카페</option>
         </select>
         <input type='submit'>
-    </form>
+    </form> -->
     <div class="map-box">
         <div class="folium-map" id="map_seoul"></div>
     </div>
@@ -43,52 +44,56 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
-    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js">
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.css" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>-->
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>  -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+    <link rel="stylesheet"
+        href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../screen.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css" />
     <script>
-        var obj = document.getElementById('genre');
-        var obj1 = window.location.href
-        var appctx = obj1.substring(obj1.lastIndexOf("genre"));
-        var index = obj.selectedIndex;
-        var genre = obj.options[index].value;
+        // var obj = document.getElementById('genre');
+        // var obj1 = window.location.href
+        // var appctx = obj1.substring(obj1.lastIndexOf("genre"));
+        // var index = obj.selectedIndex;
+        // var genre = obj.options[index].value;
 
         var map_seoul = L.map(
             "map_seoul", {
-            center: [37.5502, 126.982],
-            crs: L.CRS.EPSG3857,
-            zoom: 11,
-            zoomControl: true,
-            preferCanvas: false,
-        }
+                center: [37.5502, 126.982],
+                crs: L.CRS.EPSG3857,
+                zoom: 11,
+                zoomControl: true,
+                preferCanvas: false,
+            }
         );
         var tile_layer_feef30a9ec504dbc97fdad2819aa31b6 = L.tileLayer(
             "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            "attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.",
-            "detectRetina": false,
-            "maxNativeZoom": 18,
-            "maxZoom": 18,
-            "minZoom": 0,
-            "noWrap": false,
-            "opacity": 1,
-            "subdomains": "abc",
-            "tms": false
-        }
+                "attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.",
+                "detectRetina": false,
+                "maxNativeZoom": 18,
+                "maxZoom": 18,
+                "minZoom": 0,
+                "noWrap": false,
+                "opacity": 1,
+                "subdomains": "abc",
+                "tms": false
+            }
         ).addTo(map_seoul);
 
-        var marker_cluster_seoul = L.markerClusterGroup(
-                {}
-        );
+        var marker_cluster_seoul = L.markerClusterGroup({});
         map_seoul.addLayer(marker_cluster_seoul);
 
         var storeName = "{{ name }}".replace(/&#39;/gi, '"')
@@ -99,34 +104,92 @@
         storeLat = JSON.parse(storeLat)
         storeLon = JSON.parse(storeLon)
         pk = JSON.parse(pk)
-            var Icon = L.AwesomeMarkers.icon(
-                {"extraClasses": "fa-rotate-0", "icon": "ok", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
-            );
-            // icon({
-            // iconUrl: "{% static 'images/logo.svg' %}",
-            //     iconSize:     [38, 95], // size of the icon
-            //     iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-            //     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-            // });
-        for(var i = 0; i < storeName.length; i++) {
-            var marker_store_id = L.marker([storeLat[i], storeLon[i]], {icon : Icon}).addTo(marker_cluster_seoul);
+        var Icon = L.AwesomeMarkers.icon({
+            "extraClasses": "fa-rotate-0",
+            "icon": "ok",
+            "iconColor": "white",
+            "markerColor": "red",
+            "prefix": "glyphicon"
+        });
+        // icon({
+        // iconUrl: "{% static 'images/logo.svg' %}",
+        //     iconSize:     [38, 95], // size of the icon
+        //     iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+        //     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        // });
+        for (var i = 0; i < storeName.length; i++) {
+            var marker_store_id = L.marker([storeLat[i], storeLon[i]], {
+                icon: Icon
+            }).addTo(marker_cluster_seoul);
             var popup_store_id = L.popup({
                 "maxWidth": "1000px"
             });
             // var i_frame_seoul = $(``)[0];
             var html_store_id = $(
                 `
-                 <div>
-                 <button <div onclick="location.href='http://127.0.0.1:8000/analysis/${storeLat[i]}/${storeLon[i]}/${genre}'"  id='${storeName[i]}' style="width: 100%; height: 30px;">${storeName[i]} 상권분석</button>
-                 <button <div type ="button" onclick="location.href='http://127.0.0.1:8000/reserve/${pk[i]}'"  id='${pk[i]}' style="width: 100%; height: 30px;">${storeName[i]} 예약하기</button>
-                 </div>`
+                <div>
+                    <button type="button" data-toggle="modal" data-target="#selectModal" id='${storeName[i]}' style="width: 100%; height: 30px;">${storeName[i]} 상권분석</button>
+                    <button type ="button" onclick="location.href='http://127.0.0.1:8000/reserve/${pk[i]}'"  id='${pk[i]}' style="width: 100%; height: 30px;">${storeName[i]} 예약하기</button>
+                `
             )[0];
             popup_store_id.setContent(html_store_id);
             marker_store_id.bindPopup(popup_store_id);
         }
+    </script>   
+        <!-- {% include "analysis/_modal.html" %} -->
+        {% load static %}
+        <!-- Modal -->
+        <div class="modal fade" id="selectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                             aria-hidden="true">&times;</span></button>
+                     <h4 class="modal-title" id="myModalLabel">업종을 선택하세요.</h4>
+                 </div>
+                 <div class="modal-body">
+                     <!-- button -->
+                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                         <div class="btn-group" role="group">
+                           <button type="button" class="btn btn-default" value="중식">중식<span><img src="{% static 'images/food_chinese.png' %}" style="width:10%;"></span></button>
+                         </div>
+                         <div class="btn-group" role="group">
+                           <button type="button" class="btn btn-default">한식<span><img src="{% static 'images/food_korean.png' %}" style="width:10%;"></span></button>
+                         </div>
+                       </div>
+                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                         <div class="btn-group" role="group">
+                           <button type="button" class="btn btn-default">양식<span><img src="{% static 'images/food_western.png' %}" style="width:10%;"></span></button>
+                         </div>
+                         <div class="btn-group" role="group">
+                           <button type="button" class="btn btn-default">분식<span><img src="{% static 'images/food_snacks.png' %}" style="width:10%;"></span></button>
+                         </div>
+                       </div>
+                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                         <div class="btn-group" role="group">
+                           <button type="button" class="btn btn-default">패스트푸드점<span><img src="{% static 'images/food_fastfood.png' %}" style="width:10%;"></span></button>
+                         </div>
+                         <div class="btn-group" role="group">
+                           <button type="button" class="btn btn-default">제과제빵떡케익<span><img src="{% static 'images/food_bread.png' %}" style="width:10%;"></span></button>
+                         </div>
+                       </div>
+                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                         <div class="btn-group" role="group">
+                           <button type="button" class="btn btn-default">편의점/카페<span><img src="{% static 'images/food_cafe.png' %}" style="width:10%;"></span></button>
+                         </div>
+                         <div class="btn-group" role="group">
+                           </div>
+                       </div>
+                     <!-- button -->
+                     <div class="modal-footer">
+                       <a href="#"><button class="submit-btn btn btn-secondary">분석하기</button></a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <!-- Modal -->
         
-    </script>
-    {% endblock cdn_js %}
+        {% endblock cdn_js %}
 </body>
 
 </html>

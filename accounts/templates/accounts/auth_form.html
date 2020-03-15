@@ -37,13 +37,13 @@
                     로그인</button></a></li>
     </ul>
 
-    {% elif request.resolver_match.url_name == 'logout' %}
+    <!-- {% elif request.resolver_match.url_name == 'logout' %}
     <ul class="actions" style='float:right;'>
         <li><button type="button" class="secondaary">간편 회원가입</button></li>
         <li><a href="{% provider_login_url 'kakao' %}"><button class='secondary' style="display:inline;">카카오톡
                     로그인</button></a></li>
     </ul>
-    {% endif %}
+    {% endif %} -->
     
    {% include "accounts/_modal.html" %}
     {% endblock content_content %}
