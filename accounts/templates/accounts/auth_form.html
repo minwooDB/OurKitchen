@@ -31,7 +31,7 @@
 
     {% if request.resolver_match.url_name == 'login' %}
     <ul class="actions" style='float:right;'>
-    <li><a href="#loginModal" rel="modal:open"><button type='button' class='secondary'>간편 회원가입</button></a></li>
+    <li><button type="button" class="secondary" data-toggle="modal" data-target="#loginModal">간편 회원가입</button></li>
         <!-- <li><a href="#open"><button type="button" class = "secondary">간편 회원가입</button></a></li> -->
         <li><a href="{% provider_login_url 'kakao' %}"><button class='secondary' style="display:inline;">카카오톡
                     로그인</button></a></li>
