@@ -1,51 +1,57 @@
 {% load static %}
- <!-- Modal -->
- <div class="modal fade" id="selectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal -->
+<div class="modal fade" id="selectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                      aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">업종을 선택하세요.</h4>
-          </div>
-          <div class="modal-body">
-              <!-- button -->
-              <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" value="중식">중식<span><img src="{% static 'images/food_chinese.png' %}" style="width:10%;"></span></button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">한식<span><img src="{% static 'images/food_korean.png' %}" style="width:10%;"></span></button>
-                  </div>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">양식<span><img src="{% static 'images/food_western.png' %}" style="width:10%;"></span></button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">분식<span><img src="{% static 'images/food_snacks.png' %}" style="width:10%;"></span></button>
-                  </div>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">패스트푸드점<span><img src="{% static 'images/food_fastfood.png' %}" style="width:10%;"></span></button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">제과제빵떡케익<span><img src="{% static 'images/food_bread.png' %}" style="width:10%;"></span></button>
-                  </div>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">편의점/카페<span><img src="{% static 'images/food_cafe.png' %}" style="width:10%;"></span></button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    </div>
-                </div>
-              <!-- button -->
-              <div class="modal-footer">
-                <a href="/analysis/37.499574/127.042926/한식"><button class="submit-btn btn btn-secondary">분석하기</button></a>
-              </div>
-          </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title" id="myModalLabel">업종을 선택하세요.</h4>
       </div>
+      <div class="modal-body">
+        <!-- button -->
+        <section class="tiles">
+        <article class="style1">
+          <span class="image">
+            <img src="{% static 'images/pic02.jpg' %}" alt="" />
+          </span>
+          <a href="{% url 'analysis:kitchen_map' %}">
+            <h2>중식</h2>
+            <div class="content">
+              <p></p>
+            </div>
+          </a>
+        </article>
+        <article class="style2">
+          <span class="image">
+            <img src="{% static 'images/pic03.jpg' %}" alt="" />
+          </span>
+          <a href="{% url 'chatbot:chat' %}">
+            <h2>한식</h2>
+            <div class="content">
+              <p></p>
+            </div>
+          </a>
+        </article>
+        <article class="style3">
+          <span class="image">
+            <img src="{% static 'images/pic01.jpg' %}" alt="" />
+          </span>
+          <a href="{% url 'reserve:index' %}">
+            <h2>일식</h2>
+            <div class="content">
+              <p></p>
+            </div>
+          </a>
+        </article>
+      </section>
+      </div>
+      
+      <!-- button -->
+      <div class="modal-footer">
+        <a href="/analysis/37.499574/127.042926/한식"><button class="submit-btn btn btn-secondary">분석하기</button></a>
+      </div>
+    </div>
   </div>
-  <!-- Modal -->
+</div>
+<!-- Modal -->
