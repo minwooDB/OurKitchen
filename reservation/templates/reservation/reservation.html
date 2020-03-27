@@ -12,21 +12,6 @@
     {% block content_explain %}{{kitchen.kitchen_name}}{% endblock %}
     <!-- content 내용 -->
     {% block content_content %}
-    <div class="container-fluid">
-        <div class="row-fluid">
-
-            <!-- 먼슬리 캘린더 -->
-            {% include "reservation/calendar.html" %}
-
-        </div>
-
-    </div>
-    {% for schedule in schedules %}
-    {{schedule.start_time}}
-    {% endfor %}
-    {% endblock content_content %}
-    <!-- content 내용 끝 -->
-    {% block footer %}
     <section>
         <div class="row">
             <div class="col-md-6">
@@ -48,7 +33,22 @@
         </div>
 
     </section>
-    {% endblock footer %}
+    {% for schedule in schedules %}
+    {{schedule.start_time}}
+    {% endfor %}
+    
+    <!-- content 내용 끝 -->
+    <div class="container-fluid">
+        <div class="row-fluid">
+
+            <!-- 먼슬리 캘린더 -->
+            {% include "reservation/calendar.html" %}
+
+        </div>
+
+    </div>
+    {% endblock content_content %}
+ 
 </body>
 
 </html>

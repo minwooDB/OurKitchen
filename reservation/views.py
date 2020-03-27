@@ -34,7 +34,7 @@ def index(request):
             tooltip=tooltip,
         ).add_to(marker_cluster)
 
-    # m.save('reservation/map.html')
+    m.save('reservation/map.html')
     return render(request, 'reservation/index.html', {'map': m._repr_html_, 'kitchens': kitchens})
 
 
