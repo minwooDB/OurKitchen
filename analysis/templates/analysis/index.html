@@ -18,19 +18,7 @@
 
     <!-- content 내용 -->
     {% block content_content %}
-    <!-- <form action =   -->
-    <!-- <form action="">
-        <select id='genre' name='genre'>
-            <option>중식</option>
-            <option>한식</option>
-            <option>양식</option>
-            <option>분식</option>
-            <option>패스트푸드점</option>
-            <option>제과제빵떡케익</option>
-            <option>커피점/카페</option>
-        </select>
-        <input type='submit'>
-    </form> -->
+ 
     <div class="map-box">
         <div class="folium-map" id="map_seoul"></div>
     </div>
@@ -48,28 +36,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js">
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.css" />
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/> -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>-->
 
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/> 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
     <link rel="stylesheet"
         href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../screen.css" />
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css" />
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css" />
     <script>
-        // var obj = document.getElementById('genre');
-        // var obj1 = window.location.href
-        // var appctx = obj1.substring(obj1.lastIndexOf("genre"));
-        // var index = obj.selectedIndex;
-        // var genre = obj.options[index].value;
-
         var map_seoul = L.map(
             "map_seoul", {
                 center: [37.5502, 126.982],
@@ -128,67 +108,18 @@
             var html_store_id = $(
                 `
                 <div>
-                    <button type="button" data-toggle="modal" data-target="#selectModal" id='${storeName[i]}' style="width: 100%; height: 30px;">${storeName[i]} 상권분석</button>
-                    <button type ="button" onclick="location.href='http://127.0.0.1:8000/reserve/${pk[i]}'"  id='${pk[i]}' style="width: 100%; height: 30px;">${storeName[i]} 예약하기</button>
+                    <h3>${storeName[i]}</h3>
+                    <button type="button" data-toggle="modal" data-target="#selectModal" data-lat='${storeLat[i]}' data-lon='${storeLon[i]}' class='open-selectModal' id='${storeName[i]}' style="width: 100%; height: 30px;">&nbsp&nbsp&nbsp&nbsp상권분석&nbsp&nbsp&nbsp&nbsp</button>
+                    <button type ="button" onclick="location.href='http://127.0.0.1:8000/reserve/${pk[i]}'"  id='${pk[i]}' style="width: 100%; height: 30px;">&nbsp&nbsp&nbsp&nbsp예약하기&nbsp&nbsp&nbsp&nbsp</button>
                 `
             )[0];
             popup_store_id.setContent(html_store_id);
             marker_store_id.bindPopup(popup_store_id);
         }
     </script>   
-        <!-- {% include "analysis/_modal.html" %} -->
-        {% load static %}
-        <!-- Modal -->
-        <div class="modal fade" id="selectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-         <div class="modal-dialog" role="document">
-             <div class="modal-content">
-                 <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                             aria-hidden="true">&times;</span></button>
-                     <h4 class="modal-title" id="myModalLabel">업종을 선택하세요.</h4>
-                 </div>
-                 <div class="modal-body">
-                     <!-- button -->
-                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                         <div class="btn-group" role="group">
-                           <button type="button" class="btn btn-default" value="중식">중식<span><img src="{% static 'images/food_chinese.png' %}" style="width:10%;"></span></button>
-                         </div>
-                         <div class="btn-group" role="group">
-                           <button type="button" class="btn btn-default">한식<span><img src="{% static 'images/food_korean.png' %}" style="width:10%;"></span></button>
-                         </div>
-                       </div>
-                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                         <div class="btn-group" role="group">
-                           <button type="button" class="btn btn-default">양식<span><img src="{% static 'images/food_western.png' %}" style="width:10%;"></span></button>
-                         </div>
-                         <div class="btn-group" role="group">
-                           <button type="button" class="btn btn-default">분식<span><img src="{% static 'images/food_snacks.png' %}" style="width:10%;"></span></button>
-                         </div>
-                       </div>
-                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                         <div class="btn-group" role="group">
-                           <button type="button" class="btn btn-default">패스트푸드점<span><img src="{% static 'images/food_fastfood.png' %}" style="width:10%;"></span></button>
-                         </div>
-                         <div class="btn-group" role="group">
-                           <button type="button" class="btn btn-default">제과제빵떡케익<span><img src="{% static 'images/food_bread.png' %}" style="width:10%;"></span></button>
-                         </div>
-                       </div>
-                       <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                         <div class="btn-group" role="group">
-                           <button type="button" class="btn btn-default">편의점/카페<span><img src="{% static 'images/food_cafe.png' %}" style="width:10%;"></span></button>
-                         </div>
-                         <div class="btn-group" role="group">
-                           </div>
-                       </div>
-                     <!-- button -->
-                     <div class="modal-footer">
-                       <a href="#"><button class="submit-btn btn btn-secondary">분석하기</button></a>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <!-- Modal -->
-        
+    
+        {% include "analysis/_modal.html" %}
+       
         {% endblock cdn_js %}
 </body>
 

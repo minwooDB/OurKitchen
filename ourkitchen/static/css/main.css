@@ -2812,6 +2812,7 @@ button:disabled,
 	margin: 0;
 }
 
+
 .tiles article>a .content {
 	-moz-transition: max-height 0.5s ease, opacity 0.5s ease;
 	-webkit-transition: max-height 0.5s ease, opacity 0.5s ease;
@@ -2845,15 +2846,15 @@ button:disabled,
 }
 
 .tiles article.style4>.image:before {
-	background-color: #c75b9b;
+	background-color: #e4cedb;
 }
 
 .tiles article.style5>.image:before {
-	background-color: #ae85ca;
+	background-color: #d7c9e0;
 }
 
 .tiles article.style6>.image:before {
-	background-color: #8499e7;
+	background-color: #21398d;
 }
 
 body:not(.is-touch) .tiles article:hover>.image {
