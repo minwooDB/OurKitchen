@@ -5,6 +5,7 @@ class Kitchen_info(models.Model):
     kitchen_name = models.CharField(max_length=20)
     lat = models.FloatField(blank=False)
     lng = models.FloatField(blank=False)
+    add = models.CharField(max_length=20)
     image = models.CharField(max_length=20)
     capacity = models.IntegerField()
 
@@ -102,6 +103,10 @@ class Sales(models.Model):
     dinner_sales = models.IntegerField()
     men_sales_rate = models.IntegerField()
     women_sales_rate = models.IntegerField()
+
+class IndustryCode(models.Model):
+    name = models.CharField(max_length=20)
+    code = models.CharField(max_length=20)
     
 
 
