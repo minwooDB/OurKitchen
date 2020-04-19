@@ -1,51 +1,124 @@
 {% load static %}
- <!-- Modal -->
- <div class="modal fade" id="selectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal -->
+<div class="modal fade" id="selectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                      aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">업종을 선택하세요.</h4>
-          </div>
-          <div class="modal-body">
-              <!-- button -->
-              <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default" value="중식">중식<span><img src="{% static 'images/food_chinese.png' %}" style="width:10%;"></span></button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">한식<span><img src="{% static 'images/food_korean.png' %}" style="width:10%;"></span></button>
-                  </div>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">양식<span><img src="{% static 'images/food_western.png' %}" style="width:10%;"></span></button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">분식<span><img src="{% static 'images/food_snacks.png' %}" style="width:10%;"></span></button>
-                  </div>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">패스트푸드점<span><img src="{% static 'images/food_fastfood.png' %}" style="width:10%;"></span></button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">제과제빵떡케익<span><img src="{% static 'images/food_bread.png' %}" style="width:10%;"></span></button>
-                  </div>
-                </div>
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default">편의점/카페<span><img src="{% static 'images/food_cafe.png' %}" style="width:10%;"></span></button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    </div>
-                </div>
-              <!-- button -->
-              <div class="modal-footer">
-                <a href="/analysis/37.499574/127.042926/한식"><button class="submit-btn btn btn-secondary">분석하기</button></a>
-              </div>
-          </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title" id="myModalLabel">업종을 선택하세요.</h4>
+          
       </div>
+      <div class="modal-body">
+        <!-- button -->
+        <section class="tiles">
+       
+          <article class="style1">
+          <span class="image">
+            <img src="{% static 'images/foodType/chinese.jpg' %}" alt="" />
+          </span>
+          <a id="type" onclick="searchType('중식');">
+            <h2>중식</h2>
+            <div class="content">
+              <p></p>
+            </div>
+          </a>
+        </article>
+
+        <article class="style2">
+          <span class="image">
+            <img src="{% static 'images/foodType/korean.jpg' %}" alt="" />
+          </span>
+          <a id="type" onclick="searchType('한식');">
+            <h2>한식</h2>
+            <div class="content">
+              <p></p>
+            </div>
+          </a>
+        </article>
+
+        <article class="style3">
+          <span class="image">
+            <img src="{% static 'images/foodType/western.png' %}" alt="" />
+          </span>
+          <a id="type" onclick="searchType('양식');">
+            <h2>양식</h2>
+            <div class="content">
+              <p></p>
+            </div>
+          </a>
+        </article>
+        <article class="style4">
+          <span class="image">
+            <img src="{% static 'images/foodType/snack.jpg' %}" alt="" />
+          </span>
+          <a id="type" onclick="searchType('분식');">
+            <h2>분식</h2>
+            <div class="content">
+              <p></p>
+            </div>
+          </a>
+        </article>
+
+        <article class="style5">
+          <span class="image">
+            <img src="{% static 'images/foodType/fastfood.jpg' %}" alt="" />
+          </span>
+          <a id="type" onclick="searchType('패스트푸드');">
+            <h2>패스트푸드</h2>
+            <div class="content">
+              <p></p>
+            </div>
+          </a>
+        </article>
+
+        <article class="style1">
+          <span class="image">
+            <img src="{% static 'images/foodType/bakery.png' %}" alt="" />
+          </span>
+          <a id="type" onclick="searchType('제과빵떡케익');">
+            <h2>베이커리</h2>
+            <div class="content">
+              <p></p>
+            </div>
+          </a>
+        </article>
+        <article class="style6">
+          <span class="image">
+            <img src="{% static 'images/foodType/cafe.jpg' %}" alt="" />
+          </span>
+          <a id="type" onclick="searchType('커피/편의점');">
+            <h2>카페</h2>
+            <div class="content">
+              <p></p>
+            </div>
+          </a>
+        </article>
+
+      </section>
+      <input type="text" name="bookId" id="bookId" value=""/>
+      </div>
+      <!-- button -->
+      <div class="modal-footer">
+      </div>
+    </div>
   </div>
-  <!-- Modal -->
+</div>
+<!-- Modal -->
+
+<script>
+var lat = "";
+var lon = "";
+$(document).on("click", ".open-selectModal", function () {
+     lat = $(this).data('lat');  
+     lon = $(this).data('lon');
+    });
+
+    function searchType(type)
+    {
+        //var blackCount = type.trim();
+       // console.log(type); 
+        location.href='http://127.0.0.1:8000/analysis/'+lat+'/'+lon+'/'+type;
+    }
+
+</script>
