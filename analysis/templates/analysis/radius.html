@@ -30,7 +30,6 @@
 <script>
     L_NO_TOUCH = false;
     L_DISABLE_3D = false;
-    var result2 = "{{ result2 }}"
     var lat = "{{ lat }}"
     var lng = "{{ lng }}"
     var map_analysis = L.map(
@@ -68,8 +67,10 @@
     var sales_info = "{{sales_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
     var stay_info = "{{stay_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
     var move_info = "{{move_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
+    // mychar2
     var pie_values = "{{pie_values}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\)/gi, '');
     var pie_keys = "{{pie_keys}}".replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]');
+    // mychar1 
     var remain_Term = "{{remain_term}}".replace(/&#39;/gi, '')
     var plma = "{{plma}}".replace(/&#39;/gi, '')
     var danger = "{{danger}}".replace(/&#39;/gi, '')
