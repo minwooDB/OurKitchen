@@ -46,7 +46,13 @@ source venv/Scripts/activate
 pip install -r requirments.txt
 ```
 
-- Sqlite
+- Migrate
+
+```
+python manage.py migrate
+```
+
+- Database
 
 ```shell
 sqlite3
