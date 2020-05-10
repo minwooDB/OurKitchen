@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Kitchen_info, Start_up, Movepop, stay_pop, Sales, IndustryCode
+from .models import Kitchen_info, Startup, Floatingpop, Residentpop, Sales, IndustryCode
 import urllib.request
 import requests
 import pandas as pd
@@ -43,7 +43,7 @@ def radius(request, lat, lng, genre):
         times = len(res["body"]["items"])
         for i in range(times):
     
-    .append(res["body"]["items"][i]["bizesId"]) # 상가업소번호
+            store_id.append(res["body"]["items"][i]["bizesId"]) # 상가업소번호
             store_code.append(res["body"]["items"][i]["indsMclsNm"]) # 상권업종중분류코드
             store_lon.append(res["body"]["items"][i]["lon"])
             store_lat.append(res["body"]["items"][i]["lat"])
@@ -52,19 +52,19 @@ def radius(request, lat, lng, genre):
             street_name1 = street_name.split(' ')[2]
             street_names.append(street_name1) # 길이름
         ### mychar1
-        if Start_up: # 창업지수
+        if Startup: # 창업지수
             area_name = res["body"]["items"][0]["signguNm"] # 지역구명
-            start_up = Start_up.objects.get(signgunm = area_name)
-            close = start_up.close
-            remain_term = start_up.remain_term
-            plma = start_up.plma
-            danger = start_up.danger
+            startup = Startup.objects.get(signgunm = area_name)
+            close = Startup.close
+            remain_term = Startup.remain_term
+            plma = Startup.plma
+            danger = Startup.danger
 
         street_names_unique = pd.unique(street_names)
         times2 = len(street_names_unique)
         for k in range(times2):
-            move_info = Movepop.objects.filter(rdnm = street_names_unique[k]).values()
-            stay_info = stay_pop.objects.filter(rdnm = street_names_unique[k]).values()
+            move_info = Floatingpop.objects.filter(rdnm = street_names_unique[k]).values()
+            stay_info = Residentpop.objects.filter(rdnm = street_names_unique[k]).values()
             if move_info:
                 break
     sales_info = Sales.objects.filter(rdnm = move_info[0]['rdnm'], store_code = genre).values()

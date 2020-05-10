@@ -56,10 +56,10 @@ python manage.py migrate
 
 ```shell
 sqlite3
-.import data/staypop1.csv analysis_stay_pop
-.import data/start_123.csv analysis_start_up
-.import data/sales_new3.csv analysis_sales
-.import data/move_pop1.csv analysis_movepop
+.import data/residnetpop.csv analysis_Residentpop
+.import data/startup.csv analysis_Startup
+.import data/sales.csv analysis_Sales
+.import data/floating.csv analysis_Floatingpop
 .import data/kitchen_info.csv analysis_kitchen_info
 ```
 
