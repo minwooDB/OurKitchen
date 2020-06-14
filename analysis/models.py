@@ -2,23 +2,14 @@ from django.db import models
 from django.conf import settings
 
 class Kitchen_info(models.Model):
-    kitchen_name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
     lat = models.FloatField(blank=False)
     lng = models.FloatField(blank=False)
-    add = models.CharField(max_length=20)
+    address = models.CharField(max_length=20)
     image = models.CharField(max_length=20)
     capacity = models.IntegerField()
 
-class Reservation_time(models.Model):
-    kitchen_name = models.ForeignKey(Kitchen_info, on_delete=models.CASCADE)
-    start_date = models.DateField()
-    last_date = models.DateField()
-    time = models.IntegerField()
-
-class User(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
-class Start_up(models.Model):
+class Startup(models.Model):
     signgucd = models.IntegerField()
     signgunm = models.CharField(max_length=20)
     danger =  models.CharField(max_length=20)
@@ -26,8 +17,9 @@ class Start_up(models.Model):
     remain_term = models.FloatField(blank=False)
     plma = models.FloatField(blank=False)
 
-class move_pop(models.Model):
+class Residentpop(models.Model):
     rdnm = models.CharField(max_length=20)
+    dong = models.CharField(max_length=20)
     all_total = models.IntegerField()
     men_total = models.IntegerField()
     women_total = models.IntegerField()
@@ -47,7 +39,7 @@ class move_pop(models.Model):
     women_50s = models.IntegerField()
     women_60s = models.IntegerField()
 
-class stay_pop(models.Model):
+class Floatingpop(models.Model):
     rdnm = models.CharField(max_length=20)
     all_total = models.IntegerField()
     men_total = models.IntegerField()
@@ -67,27 +59,7 @@ class stay_pop(models.Model):
     women_40s = models.IntegerField()
     women_50s = models.IntegerField()
     women_60s = models.IntegerField()
-
-class Movepop(models.Model):
-    rdnm = models.CharField(max_length=20)
-    all_total = models.IntegerField()
-    men_total = models.IntegerField()
-    women_total = models.IntegerField()
-    total_20s = models.IntegerField()
-    total_30s = models.IntegerField()
-    total_40s = models.IntegerField()
-    total_50s = models.IntegerField()
-    total_60s = models.IntegerField()
-    men_20s = models.IntegerField()
-    men_30s = models.IntegerField()
-    men_40s = models.IntegerField()
-    men_50s = models.IntegerField()
-    men_60s = models.IntegerField()
-    women_20s = models.IntegerField()
-    women_30s = models.IntegerField()
-    women_40s = models.IntegerField()
-    women_50s = models.IntegerField()
-    women_60s = models.IntegerField()
+    dong = models.CharField(max_length=20)
 
 class Sales(models.Model):
     rdnm = models.CharField(max_length=20)
@@ -103,12 +75,8 @@ class Sales(models.Model):
     dinner_sales = models.IntegerField()
     men_sales_rate = models.IntegerField()
     women_sales_rate = models.IntegerField()
+    dong = models.CharField(max_length=20)
 
 class IndustryCode(models.Model):
     name = models.CharField(max_length=20)
     code = models.CharField(max_length=20)
-    
-
-
-
-     

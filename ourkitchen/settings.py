@@ -49,9 +49,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.account',
     'allauth.socialaccount.providers.kakao',
-      # full callender
-    'fullcalendar', 
-    'schedule',
 ]
 
 

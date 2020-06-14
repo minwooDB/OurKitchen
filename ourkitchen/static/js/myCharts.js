@@ -63,6 +63,7 @@
     console.log(move_info)
     console.log(pie_values)
     console.log(stay_info[2])
+    
     var myChart2 = new Chart(ctx2, {
         type: 'pie',
 

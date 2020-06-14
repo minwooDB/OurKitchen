@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Kitchen_info, Start_up, Movepop, stay_pop, Sales, IndustryCode
+from .models import Kitchen_info, Startup, Floatingpop, Residentpop, Sales, IndustryCode
 import urllib.request
 import requests
 import pandas as pd
@@ -34,7 +34,7 @@ def radius(request, lat, lng, genre):
     store_lat = list()
     street_names = list()
     map = folium.Map(location=[lat,lng], zoom_start=14)
-    print(code.code)
+
     for j in range(1, 30):
         url = f'http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius?radius=500&cx={lng}&cy={lat}&ServiceKey={token}&type=json&indsLclsCd=Q&pageNo={j}'
         res = requests.get(url).json()
@@ -42,25 +42,29 @@ def radius(request, lat, lng, genre):
             break
         times = len(res["body"]["items"])
         for i in range(times):
+    
             store_id.append(res["body"]["items"][i]["bizesId"]) # 상가업소번호
             store_code.append(res["body"]["items"][i]["indsMclsNm"]) # 상권업종중분류코드
             store_lon.append(res["body"]["items"][i]["lon"])
             store_lat.append(res["body"]["items"][i]["lat"])
+            
             street_name = res["body"]["items"][i]["rdnm"] # 도로명
             street_name1 = street_name.split(' ')[2]
             street_names.append(street_name1) # 길이름
-        if Start_up: # 창업지수
+        ### mychar1
+        if Startup: # 창업지수
             area_name = res["body"]["items"][0]["signguNm"] # 지역구명
-            start_up = Start_up.objects.get(signgunm = area_name)
-            close = start_up.close
-            remain_term = start_up.remain_term
-            plma = start_up.plma
-            danger = start_up.danger
+            startup = Startup.objects.get(signgunm = area_name)
+            close = Startup.close
+            remain_term = Startup.remain_term
+            plma = Startup.plma
+            danger = Startup.danger
+
         street_names_unique = pd.unique(street_names)
         times2 = len(street_names_unique)
         for k in range(times2):
-            move_info = Movepop.objects.filter(rdnm = street_names_unique[k]).values()
-            stay_info = stay_pop.objects.filter(rdnm = street_names_unique[k]).values()
+            move_info = Floatingpop.objects.filter(rdnm = street_names_unique[k]).values()
+            stay_info = Residentpop.objects.filter(rdnm = street_names_unique[k]).values()
             if move_info:
                 break
     sales_info = Sales.objects.filter(rdnm = move_info[0]['rdnm'], store_code = genre).values()
@@ -69,8 +73,13 @@ def radius(request, lat, lng, genre):
     stay_info = stay_info[0].values()
 
     store_code_unique = pd.unique(store_code)
+    # 업종별로 카운트
     piechart_value = Counter(store_code)
+    ### mychar2
     pie_keys = list(piechart_value.keys())
     pie_values = piechart_value.values()
-    print(sales_info)
+
+    print(piechart_value)
+    print(pie_keys)
+    print(pie_values)
     return render(request, 'analysis/radius.html',{'sales_info':sales_info,'move_info':move_info,'stay_info':stay_info,'pie_keys':pie_keys,'pie_values':pie_values,'danger':danger,'lat':lat,'lng':lng,'store_id':store_id,'store_code':store_code,'store_lon':store_lon,'store_lat':store_lat, 'close':close, 'remain_term':remain_term, 'plma':plma })
