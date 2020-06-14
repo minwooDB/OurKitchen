@@ -41,7 +41,6 @@ class Residentpop(models.Model):
 
 class Floatingpop(models.Model):
     rdnm = models.CharField(max_length=20)
-    dong = models.CharField(max_length=20)
     all_total = models.IntegerField()
     men_total = models.IntegerField()
     women_total = models.IntegerField()
@@ -60,10 +59,10 @@ class Floatingpop(models.Model):
     women_40s = models.IntegerField()
     women_50s = models.IntegerField()
     women_60s = models.IntegerField()
+    dong = models.CharField(max_length=20)
 
 class Sales(models.Model):
     rdnm = models.CharField(max_length=20)
-    dong = models.CharField
     store_code = models.CharField(max_length=20)
     mon_sales = models.IntegerField()
     mon_sales_count = models.IntegerField()
@@ -76,6 +75,7 @@ class Sales(models.Model):
     dinner_sales = models.IntegerField()
     men_sales_rate = models.IntegerField()
     women_sales_rate = models.IntegerField()
+    dong = models.CharField(max_length=20)
 
 class IndustryCode(models.Model):
     name = models.CharField(max_length=20)

@@ -1,4 +1,4 @@
-rdnm,store_code, mon_sales , mon_sales_count ,weekdays_sales_rate,weekend_sales_rate,weekdays_sales_coount,weekend_sales_count,breakfast(06~11),lunch(11~17),dinner(17~06),men_sales_rate,women_sales_rate,dong
+rdnm,store_code,mon_sales,mon_sales_count,weekdays_sales_rate,weekend_sales_rate,weekdays_sales_coount,weekend_sales_count,breakfast_sales,lunch_sales,dinner_sales,men_sales_rate,women_sales_rate,dong
 계동길,한식,690907504,19840,26,75,15582,4258,1,67,32,52,48,계동
 계동길,중식,45229622,2447,29,71,1743,704,-1,61,40,37,63,계동
 계동길,양식,153713419,2928,42,58,1686,1242,1,50,49,41,59,계동
