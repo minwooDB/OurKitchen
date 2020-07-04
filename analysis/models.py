@@ -26,28 +26,7 @@ class Start_up(models.Model):
     remain_term = models.FloatField(blank=False)
     plma = models.FloatField(blank=False)
 
-class move_pop(models.Model):
-    rdnm = models.CharField(max_length=20)
-    all_total = models.IntegerField()
-    men_total = models.IntegerField()
-    women_total = models.IntegerField()
-    total_20s = models.IntegerField()
-    total_30s = models.IntegerField()
-    total_40s = models.IntegerField()
-    total_50s = models.IntegerField()
-    total_60s = models.IntegerField()
-    men_20s = models.IntegerField()
-    men_30s = models.IntegerField()
-    men_40s = models.IntegerField()
-    men_50s = models.IntegerField()
-    men_60s = models.IntegerField()
-    women_20s = models.IntegerField()
-    women_30s = models.IntegerField()
-    women_40s = models.IntegerField()
-    women_50s = models.IntegerField()
-    women_60s = models.IntegerField()
-
-class stay_pop(models.Model):
+class Stay_pop(models.Model):
     rdnm = models.CharField(max_length=20)
     all_total = models.IntegerField()
     men_total = models.IntegerField()

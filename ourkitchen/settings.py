@@ -4,7 +4,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+SETTINGS_DIR = os.path.dirname(__file__)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -24,6 +24,7 @@ LOGIN_REDIRECT_URL = 'index' # 기본값 : 'accounts/
 # Application definition
 
 INSTALLED_APPS = [
+    'ourkitchen',
     'accounts',
     'analysis',
     'django.contrib.admin',
@@ -49,9 +50,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.account',
     'allauth.socialaccount.providers.kakao',
-      # full callender
-    'fullcalendar', 
-    'schedule',
 ]
 
 
@@ -74,7 +72,7 @@ ROOT_URLCONF = 'ourkitchen.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'ourkitchen', 'templates')],
+        'DIRS': [os.path.join(SETTINGS_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

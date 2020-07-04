@@ -36,5 +36,5 @@ def index(request):
     return render(request, 'schedule/index.html', {'calendar_config_options': calendar_options(event_url, OPTIONS)})
 
 def all_events(request):
-events = CalendarEvent.objects.all()
-return HttpResponse(events_to_json(events), content_type='application/json')
+    events = CalendarEvent.objects.all()
+    return HttpResponse(events_to_json(events), content_type='application/json')

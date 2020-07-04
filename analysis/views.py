@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Kitchen_info, Start_up, Movepop, stay_pop, Sales, IndustryCode
+from .models import Kitchen_info, Start_up, Movepop, Stay_pop, Sales, IndustryCode
 import urllib.request
 import requests
 import pandas as pd
@@ -8,7 +8,7 @@ from decouple import config
 from collections import Counter
 import json
 
-# 소상공인 API
+# 소상공인 APIs
 token = config('TOKEN')
 
 # 실제 기본 상권분석 페이지
@@ -34,7 +34,6 @@ def radius(request, lat, lng, genre):
     store_lat = list()
     street_names = list()
     map = folium.Map(location=[lat,lng], zoom_start=14)
-    print(code.code)
     for j in range(1, 30):
         url = f'http://apis.data.go.kr/B553077/api/open/sdsc/storeListInRadius?radius=500&cx={lng}&cy={lat}&ServiceKey={token}&type=json&indsLclsCd=Q&pageNo={j}'
         res = requests.get(url).json()
@@ -60,7 +59,7 @@ def radius(request, lat, lng, genre):
         times2 = len(street_names_unique)
         for k in range(times2):
             move_info = Movepop.objects.filter(rdnm = street_names_unique[k]).values()
-            stay_info = stay_pop.objects.filter(rdnm = street_names_unique[k]).values()
+            stay_info = Stay_pop.objects.filter(rdnm = street_names_unique[k]).values()
             if move_info:
                 break
     sales_info = Sales.objects.filter(rdnm = move_info[0]['rdnm'], store_code = genre).values()

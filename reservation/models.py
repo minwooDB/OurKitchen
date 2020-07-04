@@ -21,7 +21,7 @@ class Reservation(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.user.username}의 예약 - {self.start_date} ~ {self.end_date} : {self.time}"
+        return f"{self.user.email}의 예약 - {self.start_date} ~ {self.end_date} : {self.time}"
 
     # 시간대가 겹치지 않으면 날짜가 겹쳐도 예약 가능
     # 시간대가 겹치면 날짜가 겹치지 않아야 예약 가능
