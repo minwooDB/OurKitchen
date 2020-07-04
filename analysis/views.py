@@ -1,9 +1,5 @@
 from django.shortcuts import render, redirect
-<<<<<<< HEAD
-from .models import Kitchen_info, Start_up, Movepop, Stay_pop, Sales, IndustryCode
-=======
 from .models import Kitchen_info, Startup, Floatingpop, Residentpop, Sales, IndustryCode
->>>>>>> d865e077fa62260483ec00cdadcf368ea8d17ff3
 import urllib.request
 import requests
 import pandas as pd
