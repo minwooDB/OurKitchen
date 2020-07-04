@@ -1,0 +1,39 @@
+{% extends "accounts/auth_form.html" %}
+{% load static %}
+
+{% block url_name %}회원가입{% endblock %}
+{% block form %} 
+<div class="text-center">
+    <label>
+    {% if classification == 'p' %}
+    공유주방 점주님
+    {% else %}
+    공유주방 입점 희망 사장님
+    {% endif %}
+    </label>
+</div>
+<div class="form-group">
+    <label>이메일</label>
+    {{ form.email }}
+</div>
+<div class="form-group">
+    <label>비밀번호</label>
+    {{ form.password }}
+</div>
+<div class="form-group">
+    <label>비밀번호 확인</label>
+    {{ form.re_password }}
+</div>
+<div class="form-group">
+    <label>이름</label>
+    {{ form.name }}
+</div>
+<div class="form-group">
+    <label>전화번호</label>
+    {{ form.phone }}
+</div>
+<p class='login_error'>{{error_message}}</p>
+<ul class="actions">
+    <li><input type="submit" value="SIGNUP" class="primary" style='display:inline; margin:1px'></li>
+</ul>
+{% endblock form %}
