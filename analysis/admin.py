@@ -3,7 +3,7 @@ from .models import Kitchen_info, IndustryCode
 
 
 class Kitchen_info_Admin(admin.ModelAdmin):
-    list_display = ('pk', 'kitchen_name', 'lat', 'lng', 'add', 'capacity')
+    list_display = ('pk', 'name', 'lat', 'lng', 'address', 'capacity')
 
 class IndustryCode_Admin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'code')

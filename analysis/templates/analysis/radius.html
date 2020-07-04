@@ -30,7 +30,6 @@
 <script>
     L_NO_TOUCH = false;
     L_DISABLE_3D = false;
-    var result2 = "{{ result2 }}"
     var lat = "{{ lat }}"
     var lng = "{{ lng }}"
     var map_analysis = L.map(
@@ -50,38 +49,45 @@
     ).addTo(map_analysis);
 
     var storeId = "{{ store_id }}".replace(/&#39;/gi, '')
-    var storeCode = "{{ store_code }}".replace(/&#39;/gi, '"')
+    // var storeCode = "{{ store_code }}".replace(/&#39;/gi, '"')
+    var storeName = "{{ store_name }}".replace(/&#39;/gi, '"')
     var storeLat = "{{ store_lat }}".replace(/&#39;/gi, '')
     var storeLon = "{{ store_lon }}".replace(/&#39;/gi, '')
     storeId = JSON.parse(storeId)
-    storeCode = JSON.parse(storeCode)
+    // storeCode = JSON.parse(storeCode)
+    storeName = JSON.parse(storeName)
     storeLat = JSON.parse(storeLat)
     storeLon = JSON.parse(storeLon)
 
     for (var i = 0; i < storeId.length; i++) {
         var marker_store_id = L.marker([storeLat[i], storeLon[i]], {}).addTo(map_analysis);
         var popup_store_id = L.popup({ "maxWidth": "100%" });
-        var html_store_id = $(`<div id='${storeId[i]}' style="width: 100.0%; height: 100.0%;">${storeCode[i]}</div>`)[0];
+        var html_store_id = $(`<div id='${storeId[i]}' style="width: 100.0%; height: 100.0%;">${storeName[i]}</div>`)[0];
         popup_store_id.setContent(html_store_id);
         marker_store_id.bindPopup(popup_store_id);
     }
-    var sales_info = "{{sales_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
-    var stay_info = "{{stay_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
-    var move_info = "{{move_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
+
+    // mychart 3-7
+    // var sales_info = "{{sales_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
+    // var stay_info = "{{stay_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
+    // var move_info = "{{move_info}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]').replace(/\)/gi, '');
+    // mychar2
     var pie_values = "{{pie_values}}".replace(/dict_values\(/gi, '').replace(/&#39;/gi, '').replace(/\)/gi, '');
     var pie_keys = "{{pie_keys}}".replace(/&#39;/gi, '').replace(/\'/gi, '\"').replace(/\,/gi, '\","').replace(/\[/gi, '\["').replace(/\]/gi, '\"]');
+    // mychar1 
     var remain_Term = "{{remain_term}}".replace(/&#39;/gi, '')
     var plma = "{{plma}}".replace(/&#39;/gi, '')
     var danger = "{{danger}}".replace(/&#39;/gi, '')
     var close = "{{close}}".replace(/&#39;/gi, '')
-    sales_info = JSON.parse(sales_info)
-    stay_info = JSON.parse(stay_info)
-    move_info = JSON.parse(move_info)
+    // sales_info = JSON.parse(sales_info)
+    // stay_info = JSON.parse(stay_info)
+    // move_info = JSON.parse(move_info)
     pie_values = JSON.parse(pie_values)
     pie_keys = JSON.parse(pie_keys)
     close = JSON.parse(close)
     remain_Term = JSON.parse(remain_Term)
     plma = JSON.parse(plma)
+    
 </script>
 {% endblock cdn_js %}
 {% block js %}

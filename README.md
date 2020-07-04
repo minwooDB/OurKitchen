@@ -28,3 +28,38 @@
 - 시각화 라이브러리: Folium, Leaflet, Chart.js
 - 챗봇: Dialogflow(Line)
 - 스타일: Twitter Bootstrap
+
+
+
+# Install
+
+- 가상환경 구축
+
+```
+python -m venv /venv
+source venv/Scripts/activate
+```
+
+- 모듈 설치
+
+```
+pip install -r requirments.txt
+```
+
+- Migrate
+
+```
+python manage.py migrate
+```
+
+- Database
+
+```shell
+sqlite3
+.import data/residnetpop.csv analysis_Residentpop
+.import data/startup.csv analysis_Startup
+.import data/sales.csv analysis_Sales
+.import data/floating.csv analysis_Floatingpop
+.import data/kitchen_info.csv analysis_kitchen_info
+```
+
