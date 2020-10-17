@@ -2,13 +2,15 @@ package com.ourkitchen.auth.vo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ourkitchen.user")
+@Table(name="user")
 public class User {
 	@Id
 	@Column(name="id")
@@ -22,8 +24,10 @@ public class User {
 	private String password;
 	@Column(name="phone_num")
 	private String phoneNum;
+	
+	@Enumerated(EnumType.STRING)
 	@Column(name="classification")
-	private Enum<Classification> classification;
+	private Classification classification;
 	
 	public Long getId() {
 		return id;
@@ -55,11 +59,16 @@ public class User {
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
-	public Enum<Classification> getClassification() {
+	public Classification getClassification() {
 		return classification;
 	}
-	public void setClassification(Enum<Classification> classification) {
+	public void setClassification(Classification classification) {
 		this.classification = classification;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", name=" + name + ", password=" + password + ", phoneNum="
+				+ phoneNum + ", classification=" + classification + "]";
 	}
 	
 	
