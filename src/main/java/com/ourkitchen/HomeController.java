@@ -20,7 +20,7 @@ public class HomeController{
 		user.setEmail("@naver.com");
 		user.setName("name");
 		user.setPassword("1234");
-		user.setClassification(Classification.PARTNER);
+		user.setClassification(Classification.P);
 		System.out.println(userRepo.save(user).toString());
 		
 		
