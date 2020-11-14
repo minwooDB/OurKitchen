@@ -8,13 +8,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.*;
 
 import com.ourkitchen.auth.vo.Classification;
 
-@Getter
-@Setter
-@ToString
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@Data
+@Entity
+@Table(name = "user")
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"id"})
 public class UserEntity {
 	@Id
 	@Column(name="id")
@@ -36,16 +43,5 @@ public class UserEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name="classification", nullable = false)
 	private Classification classification;
-	
-	public UserEntity(Long id, String email, String name, String password, String phoneNum,
-			Classification classification) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.name = name;
-		this.password = password;
-		this.phoneNum = phoneNum;
-		this.classification = classification;
-	}
 	
 }
