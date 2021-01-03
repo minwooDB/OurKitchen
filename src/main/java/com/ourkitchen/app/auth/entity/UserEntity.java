@@ -66,5 +66,4 @@ public class UserEntity {
 		this.phoneNum = phoneNum;
 		this.classification = classification;
 	}
-	
 }
