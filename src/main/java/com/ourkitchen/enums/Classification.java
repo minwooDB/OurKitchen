@@ -1,6 +1,6 @@
-package com.ourkitchen.auth.vo;
+package com.ourkitchen.enums;
 
 public enum Classification {
-	P, //partner
-	U  //user
+	p, //partner
+	u  //user
 }

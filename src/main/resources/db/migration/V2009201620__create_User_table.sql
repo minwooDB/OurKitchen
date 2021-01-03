@@ -4,7 +4,7 @@ CREATE TABLE USER (
     name VARCHAR(20) NOT NULL default "",
     password VARCHAR(12) NOT NULL,
     phone_num VARCHAR(30),
-    classfication ENUM('p', 'u'),
+    classification ENUM('p', 'u'),
     last_login DATETIME,
-    is_activate BOOLEAN
+    active ENUM('C00', 'C01','C02')
 )
