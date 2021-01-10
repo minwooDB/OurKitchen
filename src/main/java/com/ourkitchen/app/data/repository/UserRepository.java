@@ -1,11 +1,13 @@
-package com.ourkitchen.app.auth.repository;
+package com.ourkitchen.app.data.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import com.ourkitchen.app.auth.entity.UserEntity;
+import com.ourkitchen.app.data.entity.UserEntity;
 
+@Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long>{
 
 	public Optional<UserEntity> findByEmail(String email);

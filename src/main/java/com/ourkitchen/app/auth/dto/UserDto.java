@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ourkitchen.app.auth.entity.UserEntity;
+import com.ourkitchen.app.data.entity.UserEntity;
 import com.ourkitchen.enums.Classification;
 import com.ourkitchen.enums.StatusCode;
 
@@ -35,7 +35,7 @@ public class UserDto {
 	
 	@JsonIgnore
 	@NotBlank(message="비밀번호는 필수 입력 값입니다.")
-	@Pattern(regexp="(?=.*\\d)(?=.*[a-zA-Z]).{8,20}", message="비밀번호는 영문과 숫자가 각각 1자 이상씩 포함된 8자~20자의 비밀번호여야 합니다.")
+	//@Pattern(regexp="(?=.*\\d)(?=.*[a-zA-Z]).{6,12}", message="비밀번호는 영문과 숫자가 각각 1자 이상씩 포함된 6자~12자의 비밀번호여야 합니다.")
 	private String password;
 	
 	@Pattern(regexp="^\\d{10}$", message="-를 제외한 핸드폰 번호를 입력해야 합니다.")
@@ -55,6 +55,8 @@ public class UserDto {
 				.name(name)
 				.phoneNum(phoneNum)
 				.classification(classification)
+				.active(active)
+				.lastLogin(lastLogin)
 				.build();
 	}
 	

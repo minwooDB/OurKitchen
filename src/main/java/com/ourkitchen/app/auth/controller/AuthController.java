@@ -1,11 +1,12 @@
 package com.ourkitchen.app.auth.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ourkitchen.app.auth.dto.UserDto;
-import com.ourkitchen.app.auth.service.UserService;
+import com.ourkitchen.app.auth.service.UserDetailsServiceImpl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -14,15 +15,17 @@ import lombok.extern.log4j.Log4j2;
 @AllArgsConstructor
 @Controller
 public class AuthController {
-	private UserService userService;
+	
+	@Autowired
+	private UserDetailsServiceImpl userService;
 	
 	@GetMapping("/")
 	public String index() {
-		return "/index";
+		return "index";
 	}
 	@GetMapping("/user/signup") //회원가입 페이지
 	public String dispSignup() {
-		return "/signup";
+		return "auth/signup";
 	}
 	
 	@PostMapping("/user/signup") //회원가입 처리
@@ -35,26 +38,26 @@ public class AuthController {
 	
 	@GetMapping("/user/login")
 	public String dispLogin() {
-		return "/login";
+		return "auth/login";
 	}
 	
 	@GetMapping("/user/login/result")
 	public String dispLoginResult() {
-		return "/loginSuccess";
+		return "auth/loginSuccess";
 	}
 	
 	@GetMapping("/user/logout/result")
 	public String dispLogout() {
-		return "/logout";
+		return "auth/logout";
 	}
 	
 	@GetMapping("/user/denied")
 	public String dispDenied() {
-		return "/denied";
+		return "auth/denied";
 	}
 	
 	@GetMapping("/user/info")
 	public String dispMyInfo() {
-		return "myinfo";
+		return "auth/myinfo";
 	}
 }

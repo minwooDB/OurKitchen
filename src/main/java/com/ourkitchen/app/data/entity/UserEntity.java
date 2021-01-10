@@ -1,4 +1,4 @@
-package com.ourkitchen.app.auth.entity;
+package com.ourkitchen.app.data.entity;
 
 import java.time.LocalDateTime;
 
@@ -34,7 +34,7 @@ public class UserEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="eamil", length = 255, nullable = false)
+	@Column(name="eamil", length = 255, nullable = false, unique=true)
 	private String email;
 	
 	@Column(name="name", length = 20, nullable = false)
@@ -58,12 +58,14 @@ public class UserEntity {
 	private StatusCode active;
 
 	@Builder
-	public UserEntity(Long id, String email, String name, String password, String phoneNum, Classification classification) {
+	public UserEntity(Long id, String email, String name, String password, String phoneNum, Classification classification, StatusCode active, LocalDateTime lastLogin) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
 		this.password = password;
 		this.phoneNum = phoneNum;
 		this.classification = classification;
+		this.active = active;
+		this.lastLogin = lastLogin;
 	}
 }
