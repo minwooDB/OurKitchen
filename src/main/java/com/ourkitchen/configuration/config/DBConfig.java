@@ -21,7 +21,7 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.ourkitchen.repository", // TODO Repository 패키지 지정
+        basePackages = "com.ourkitchen.app.data.repository", // TODO Repository 패키지 지정
         transactionManagerRef = "mariaDB_transactionManager",
         entityManagerFactoryRef = "mariaDB_entityManagerFactory"
 )
@@ -39,7 +39,7 @@ public class DBConfig {
 			EntityManagerFactoryBuilder builder,
 			@Qualifier("maria_dataSource") DataSource dataSource) {
 		return builder.dataSource(dataSource)
-        		.packages("com.ourkitchen.*.vo")
+        		.packages("com.ourkitchen.app.data.entity")
         		.build();
 	}
 	
@@ -51,4 +51,6 @@ public class DBConfig {
 		transactionManager.setEntityManagerFactory(entityManagerFactory);
 		return transactionManager;
 	}
+	
+	
 }

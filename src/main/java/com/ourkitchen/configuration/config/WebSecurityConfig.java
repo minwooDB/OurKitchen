@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.ourkitchen.app.auth.service.UserService;
+import com.ourkitchen.app.auth.service.UserDetailsServiceImpl;
 
 import lombok.AllArgsConstructor;
 
@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 @EnableWebSecurity
 @AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-	private UserService userService;
+	private UserDetailsServiceImpl userService;
 
 	@Override
 	public void configure(WebSecurity web){
@@ -32,18 +32,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable().authorizeRequests()
 			//.antMatchers("/about").authenticated() //로그인을 요구할 경로
 			//.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/user/myinfo").hasRole("MEMBER")
+			.antMatchers("/user/info").hasRole("MEMBER")
 			.anyRequest().permitAll()
 		.and()
 			.formLogin()
 			.loginPage("/auth/login")
-			.defaultSuccessUrl("/index")
+			.defaultSuccessUrl("/")
 			.usernameParameter("email")
 			.permitAll()
 		.and()
 			.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
-			.logoutSuccessUrl("/auth/logout/result")
+			.logoutSuccessUrl("/")
 			.invalidateHttpSession(true)
 		;//.and()
 			//.addFilterBefore(filter, beforeFilter)

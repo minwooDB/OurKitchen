@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer{
 
 	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = { "classpath:/static/", "classpath:/",
-            "classpath:/db/", "classpath:/META-INF/resources/", "classpath:/templates"};
+            "classpath:/db/", "classpath:/META-INF/resources/", "classpath:/templates/"};
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
