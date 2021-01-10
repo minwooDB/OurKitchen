@@ -1,11 +1,11 @@
-package com.ourkitchen.auth.vo;
+package com.ourkitchen.enums;
 
 public enum Category {
 	KOREAN("Q01","한식"),
 	CHINESE("Q02","중식"),
 	JAPANESE("Q03","일식/수산물"),
 	SNACK("Q04","분식"),
-	CHICKEN("Q05","닭/오리요s리"),
+	CHICKEN("Q05","닭/오리요리"),
 	WESTERN("Q06","양식"),
 	FASTFOOD("Q07","패스트푸드"),
 	BREAD("Q08","제과제빵떡케익"),
