@@ -1,11 +1,12 @@
 package com.ourkitchen.app.auth.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.ourkitchen.app.auth.dto.UserDto;
+import com.ourkitchen.app.auth.dto.UserDetailsImpl;
 import com.ourkitchen.app.auth.service.UserDetailsServiceImpl;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ import lombok.extern.log4j.Log4j2;
 public class AuthController {
 	
 	@Autowired
-	private UserDetailsServiceImpl userService;
+	private UserDetailsServiceImpl userDetailService;
 	
 	@GetMapping("/")
 	public String index() {
@@ -29,9 +30,9 @@ public class AuthController {
 	}
 	
 	@PostMapping("/user/signup") //회원가입 처리
-	public String execSignup(UserDto dto) {
+	public String execSignup(UserDetailsImpl dto) {
 		log.debug("----------join user id: {}", dto.getEmail());
-		userService.joinUser(dto);
+		userDetailService.joinUser(dto);
 		
 		return "redirect:/user/login";
 	}
@@ -41,9 +42,9 @@ public class AuthController {
 		return "auth/login";
 	}
 	
-	@GetMapping("/user/login/result")
+	@PostMapping("/user/login")
 	public String dispLoginResult() {
-		return "auth/loginSuccess";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/user/logout/result")
@@ -56,6 +57,7 @@ public class AuthController {
 		return "auth/denied";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/user/info")
 	public String dispMyInfo() {
 		return "auth/myinfo";

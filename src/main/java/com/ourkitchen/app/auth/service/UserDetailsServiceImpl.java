@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ourkitchen.app.auth.dto.UserDto;
+import com.ourkitchen.app.auth.dto.UserDetailsImpl;
 import com.ourkitchen.app.data.entity.UserEntity;
 import com.ourkitchen.app.data.repository.UserRepository;
 import com.ourkitchen.enums.Role;
@@ -24,7 +24,7 @@ import com.ourkitchen.enums.StatusCode;
 
 import lombok.AllArgsConstructor;
 
-@Service
+@Service("userService")
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService{
 	
@@ -47,7 +47,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	}
 	
 	@Transactional
-	public Long joinUser(UserDto userDto) {
+	public Long joinUser(UserDetailsImpl userDto) {
 		BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
 		userDto.setPassword(pwEncoder.encode(userDto.getPassword()));
 		userDto.setActive(StatusCode.C01);
