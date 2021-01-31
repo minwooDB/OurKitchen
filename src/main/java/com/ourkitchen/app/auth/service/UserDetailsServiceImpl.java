@@ -3,7 +3,6 @@ package com.ourkitchen.app.auth.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,7 +22,9 @@ import com.ourkitchen.enums.Role;
 import com.ourkitchen.enums.StatusCode;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Service("userService")
 @AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService{
@@ -32,8 +33,11 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Optional<UserEntity> userEntityWeapper = userRepo.findByEmail(email);
-		UserEntity userEntity = userEntityWeapper.get();
+		UserEntity userEntity = userRepo.findByEmail(email);
+		
+		if(userEntity==null) throw new UsernameNotFoundException("can not found user");
+		
+		log.debug("login user email: {}", userEntity.getEmail());
 		
 		List<GrantedAuthority> authorities = new ArrayList<>();
 		

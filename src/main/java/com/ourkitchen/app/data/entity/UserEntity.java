@@ -34,13 +34,13 @@ public class UserEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="eamil", length = 255, nullable = false, unique=true)
+	@Column(name="email", length = 255, nullable = false, unique=true)
 	private String email;
 	
 	@Column(name="name", length = 20, nullable = false)
 	private String name;
 	
-	@Column(name="password", length = 12, nullable = false)
+	@Column(name="password", length = 255, nullable = false)
 	private String password;
 	
 	@Column(name="phone_num", length = 30, nullable = false)

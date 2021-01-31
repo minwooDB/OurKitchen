@@ -1,7 +1,5 @@
 package com.ourkitchen.app.auth.provider;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,7 +16,7 @@ import lombok.NonNull;
 
 @Component
 public class AuthenticationProviderImpl implements AuthenticationProvider{
-	@Resource(name="userService")
+	@Autowired
 	UserDetailsServiceImpl userService;
 	@NonNull
 	private BCryptPasswordEncoder pwdEncoder;
@@ -26,13 +24,14 @@ public class AuthenticationProviderImpl implements AuthenticationProvider{
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException{
 		UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken)authentication;
-		String email = token.getName();
+		String email = (String)token.getPrincipal();
 		String pwd = (String)token.getCredentials();
-		
 		UserDetailsImpl userDetailsImpl = (UserDetailsImpl) userService.loadUserByUsername(email);
+		
 		if(!pwdEncoder.matches(pwd, userDetailsImpl.getPassword())) {
 			throw new BadCredentialsException(userDetailsImpl.getUsername()+" Invaild password");
 		}
+		
 		
 		return new UsernamePasswordAuthenticationToken(userDetailsImpl, pwd, userDetailsImpl.getAuthorities());
  	}

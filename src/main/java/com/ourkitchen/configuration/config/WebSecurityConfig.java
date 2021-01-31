@@ -1,5 +1,6 @@
 package com.ourkitchen.configuration.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.ourkitchen.app.auth.provider.AuthenticationProviderImpl;
 import com.ourkitchen.app.auth.service.UserDetailsServiceImpl;
 
 import lombok.AllArgsConstructor;
@@ -21,18 +23,20 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	private UserDetailsServiceImpl userService;
-
+	@Autowired
+	private AuthenticationProviderImpl authProvicer;
+	
 	@Override
 	public void configure(WebSecurity web){
 		web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 	}
-	
+
 	@Override
 	public void configure(HttpSecurity http) throws Exception{
 		http.csrf().disable().authorizeRequests()
 			//.antMatchers("/about").authenticated() //로그인을 요구할 경로
 			//.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/user/info").hasRole("MEMBER")
+			.antMatchers("/auth/info").hasRole("MEMBER")
 			.anyRequest().permitAll()
 		.and()
 			.formLogin()
@@ -63,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-		//auth.authenticationProvider();
+		auth.authenticationProvider(authProvicer);
 	}
 	
 	

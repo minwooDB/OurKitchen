@@ -24,41 +24,43 @@ public class AuthController {
 	public String index() {
 		return "index";
 	}
-	@GetMapping("/user/signup") //회원가입 페이지
+	@GetMapping("/auth/signup") //회원가입 페이지
 	public String dispSignup() {
 		return "auth/signup";
 	}
 	
-	@PostMapping("/user/signup") //회원가입 처리
+	@PostMapping("/auth/signup") //회원가입 처리
 	public String execSignup(UserDetailsImpl dto) {
 		log.debug("----------join user id: {}", dto.getEmail());
 		userDetailService.joinUser(dto);
 		
-		return "redirect:/user/login";
+		return "redirect:/auth/login";
 	}
 	
-	@GetMapping("/user/login")
+	@GetMapping("/auth/login")
 	public String dispLogin() {
 		return "auth/login";
 	}
 	
-	@PostMapping("/user/login")
+	@PostMapping("/auth/login")
 	public String dispLoginResult() {
+		
+		
 		return "redirect:/";
 	}
 	
-	@GetMapping("/user/logout/result")
+	@GetMapping("/auth/logout/result")
 	public String dispLogout() {
 		return "auth/logout";
 	}
 	
-	@GetMapping("/user/denied")
+	@GetMapping("/auth/denied")
 	public String dispDenied() {
 		return "auth/denied";
 	}
 	
 	@PreAuthorize("hasRole('ROLE_MEMBER')")
-	@GetMapping("/user/info")
+	@GetMapping("/auth/info")
 	public String dispMyInfo() {
 		return "auth/myinfo";
 	}
