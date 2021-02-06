@@ -12,5 +12,7 @@
     <a sec:authorize="isAnonymous()" th:href="@{/auth/signup}">회원가입</a>
     <a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/auth/info}">내정보</a>
     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
+    <hr>
+    <a th:href="@{/kitchen}">주방 검색</a>
 </body>
 </html>
