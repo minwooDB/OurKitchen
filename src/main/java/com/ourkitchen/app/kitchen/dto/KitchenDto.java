@@ -17,32 +17,32 @@ public class KitchenDto {
 	private Long id;
 	private String name;
 	private String address;
-	private String tel;
+	private String tel_num;
 	private String biz_report;
-	private float lat;
-	private float lng;
+	private double lat;
+	private double lng;
 	private int capacity;
-	private int ac;
+	private int pyeong;
 	private long user_id;
 
 	public KitchenInfoEntity toEntity() {
-		KitchenInfoEntity build = KitchenInfoEntity.builder().id(id).name(name).address(address).tel(tel)
-				.biz_report(biz_report).lat(lat).lng(lng).capacity(capacity).ac(ac).user_id(user_id).build();
+		KitchenInfoEntity build = KitchenInfoEntity.builder().id(id).name(name).address(address).tel_num(tel_num)
+				.biz_report(biz_report).lat(lat).lng(lng).capacity(capacity).pyeong(pyeong).user_id(user_id).build();
 		return build;
 	}
 
 	@Builder
-	public KitchenDto(Long id, String name, String address, String tel, String biz_report, float lat, float lng,
-			int capacity, int ac, long user_id) {
+	public KitchenDto(Long id, String name, String address, String tel_num, String biz_report, double lat, double lng,
+			int capacity, int pyeong, long user_id) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
-		this.tel = tel;
+		this.tel_num = tel_num;
 		this.biz_report = biz_report;
 		this.lat = lat;
 		this.lng = lng;
 		this.capacity = capacity;
-		this.ac = ac;
+		this.pyeong = pyeong;
 		this.user_id = user_id;
 	}
 }

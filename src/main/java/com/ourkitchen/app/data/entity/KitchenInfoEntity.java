@@ -1,7 +1,5 @@
 package com.ourkitchen.app.data.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -32,7 +30,7 @@ public class KitchenInfoEntity {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@Column(name="name", length = 20, nullable = false, unique=true)
 	private String name;
@@ -40,38 +38,38 @@ public class KitchenInfoEntity {
 	@Column(name="address", length = 255, nullable = false)
 	private String address;
 	
-	@Column(name="tel", length = 11, nullable = false)
-	private String tel;
+	@Column(name="tel_num", length = 11, nullable = false)
+	private String tel_num;
 	
-	@Column(name="biz_report", length = 255, nullable = false)
+	@Column(name="biz_report", length = 255, nullable = true)
 	private String biz_report;
 	
 	@Column(name="lat", nullable = false)
-	private float lat;
+	private double lat;
 	
 	@Column(name="lng", nullable = false)
-	private float lng;
+	private double lng;
 	
 	@Column(name="capacity", nullable = false)
 	private int capacity;
 	
-	@Column(name="ac", nullable = true)
-	private int ac;
+	@Column(name="pyeong", nullable = true)
+	private int pyeong;
 	
 	@Column(name="user_id", nullable = false)
 	private long user_id;
 
 	@Builder
-	public KitchenInfoEntity(Long id, String name, String address, String tel, String biz_report, float lat ,float lng, int capacity, int ac, long user_id) {
+	public KitchenInfoEntity(Long id, String name, String address, String tel_num, String biz_report, double lat ,double lng, int capacity, int pyeong, long user_id) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
-		this.tel = tel;
+		this.tel_num = tel_num;
 		this.biz_report = biz_report;
 		this.lat = lat;
 		this.lng = lng;
 		this.capacity = capacity;
-		this.ac = ac;
+		this.pyeong = pyeong;
 		this.user_id = user_id;
 	}
 }
