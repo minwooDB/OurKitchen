@@ -14,5 +14,7 @@
     <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
     <hr>
     <a th:href="@{/kitchen}">주방 검색</a>
+    <!-- <a sec:authorize = "hasRole('ROLE_ADMIN')" th:href="@{/kitchen/write}">주방 등록</a> -->
+    <a th:href="@{/kitchen/write}">주방 등록</a>
 </body>
 </html>

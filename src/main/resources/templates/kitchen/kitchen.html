@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <title>주방</title>
@@ -9,7 +9,7 @@
 	<hr>
 	<!-- list -->
 	<table>
-	    <tr th:if={not #list.isEmpty( kitchenList )}" th:each="row " ${kitchenList}">
+	    <tr th:if="{not #list.isEmpty( kitchenList )}" th:each="row ${kitchenList}">
 	    	<td th:text="${row.idx}"></td>
 	    	<td th:text="${row.name}"></td>
 	    	<td th:text="${row.address}"></td>
