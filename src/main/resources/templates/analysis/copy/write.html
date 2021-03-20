@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>주방 등록</title>
+</head>
+<body>
+	<h1>주방 등록</h1>
+    <hr>
+	<th:block th:if="${param.error!=null}">
+		<span id="error-msg" th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
+	</th:block> 
+	
+    <form th:action="@{/kitchen/write}" method="post">
+        <input type="text" name="name" placeholder="주방명" th:maxlength=20>
+        <input type="text" name="address" placeholder="주소" th:maxlength=255>
+        <input type="text" name="tel_num" placeholder="전화번호('-'제외)" th:maxlength=11>
+        <input type="number" name="capacity" placeholder="수용 가능 인원"> 명
+        <input type="number" name="pyeong" placeholder="평수"> 평
+        <button type="submit">주방 등록</button>
+    </form>
+    
+    
+    
+</body>
+</html>
