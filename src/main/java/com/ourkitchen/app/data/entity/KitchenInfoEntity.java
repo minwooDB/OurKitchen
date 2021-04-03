@@ -2,15 +2,10 @@ package com.ourkitchen.app.data.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.ourkitchen.enums.Classification;
-import com.ourkitchen.enums.StatusCode;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -26,7 +21,7 @@ import lombok.ToString;
 @EqualsAndHashCode(of = {"id"})
 @Getter
 @Table(name="Kitchen_info")
-public class KitchenInfoEntity {
+public class KitchenInfoEntity extends TimeEntity{
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,10 +34,10 @@ public class KitchenInfoEntity {
 	private String address;
 	
 	@Column(name="tel_num", length = 11, nullable = false)
-	private String tel_num;
+	private String telNum;
 	
 	@Column(name="biz_report", length = 255, nullable = true)
-	private String biz_report;
+	private String bizReport;
 	
 	@Column(name="lat", nullable = false)
 	private double lat;
@@ -56,21 +51,22 @@ public class KitchenInfoEntity {
 	@Column(name="pyeong", nullable = true)
 	private int pyeong;
 	
-	@Column(name="user_id", nullable = false)
-	private long user_id;
-
+	@Column(name="user_id", nullable = true)
+	private long userId;
+	
+	
 	@Builder
-	public KitchenInfoEntity(Long id, String name, String address, String tel_num, String biz_report, double lat ,double lng, int capacity, int pyeong, long user_id) {
+	public KitchenInfoEntity(Long id, String name, String address, String telNum, String bizReport,
+			double lat ,double lng, int capacity, int pyeong, long userId) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
-		this.tel_num = tel_num;
-		this.biz_report = biz_report;
+		this.telNum = telNum;
+		this.bizReport = bizReport;
 		this.lat = lat;
 		this.lng = lng;
 		this.capacity = capacity;
 		this.pyeong = pyeong;
-		this.user_id = user_id;
+		this.userId = userId;
 	}
 }
-

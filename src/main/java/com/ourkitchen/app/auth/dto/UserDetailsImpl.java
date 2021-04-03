@@ -35,27 +35,25 @@ public class UserDetailsImpl implements UserDetails{
 	
 	private Long id;
 	
-	@NotBlank(message="ÀÌ¸ÞÀÏÀº ÇÊ¼ö ÀÔ·Â °ªÀÔ´Ï´Ù.")
-	@Email(message="ÀÌ¸ÞÀÏ Çü½Ä¿¡ ¸ÂÁö ¾Ê½À´Ï´Ù.")
+	@NotBlank(message="ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½Ô´Ï´ï¿½.")
+	@Email(message="ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.")
 	private String email;
 	
-	@NotBlank(message="ÀÌ¸§Àº ÇÊ¼ö ÀÔ·Â °ªÀÔ´Ï´Ù.")
+	@NotBlank(message="ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½Ê¼ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½Ô´Ï´ï¿½.")
 	@Size(min=4, max=20)
 	private String name;
 	
 	@JsonIgnore
-	@NotBlank(message="ºñ¹Ð¹øÈ£´Â ÇÊ¼ö ÀÔ·Â °ªÀÔ´Ï´Ù.")
-	@Pattern(regexp="(?=.*\\d)(?=.*[a-zA-Z]).{6,12}", message="ºñ¹Ð¹øÈ£´Â ¿µ¹®°ú ¼ýÀÚ°¡ °¢°¢ 1ÀÚ ÀÌ»ó¾¿ Æ÷ÇÔµÈ 6ÀÚ~12ÀÚÀÇ ºñ¹Ð¹øÈ£¿©¾ß ÇÕ´Ï´Ù.")
+	@NotBlank(message="ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½Ê¼ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½Ô´Ï´ï¿½.")
+	@Pattern(regexp="(?=.*\\d)(?=.*[a-zA-Z]).{6,12}", message="ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ 6ï¿½ï¿½~12ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½Õ´Ï´ï¿½.")
 	private String password;
 	
-	@Pattern(regexp="^\\d{10}$", message="-¸¦ Á¦¿ÜÇÑ ÇÚµåÆù ¹øÈ£¸¦ ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù.")
+	@Pattern(regexp="^\\d{10}$", message="-ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ø¾ï¿½ ï¿½Õ´Ï´ï¿½.")
 	private String phoneNum;
 	
 	private Classification classification;
 	private LocalDateTime lastLogin;
 	private StatusCode active;
-	private LocalDateTime createdDate;
-	private LocalDateTime modifiedDate;
 	
 	private String AUTHORITY;
 	
