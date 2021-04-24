@@ -54,10 +54,12 @@ public class KitchenInfoEntity extends TimeEntity{
 	@Column(name="user_id", nullable = true)
 	private long userId;
 	
+	@Column
+	private long imageId;
 	
 	@Builder
 	public KitchenInfoEntity(Long id, String name, String address, String telNum, String bizReport,
-			double lat ,double lng, int capacity, int pyeong, long userId) {
+			double lat ,double lng, int capacity, int pyeong, long userId, long imageId) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
@@ -68,5 +70,6 @@ public class KitchenInfoEntity extends TimeEntity{
 		this.capacity = capacity;
 		this.pyeong = pyeong;
 		this.userId = userId;
+		this.imageId = imageId;
 	}
 }

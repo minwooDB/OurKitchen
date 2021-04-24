@@ -1,7 +1,6 @@
 package com.ourkitchen.app.kitchen.dto;
 
 import com.ourkitchen.app.data.entity.KitchenInfoEntity;
-import com.ourkitchen.app.data.entity.UserEntity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -24,16 +23,18 @@ public class KitchenDto {
 	private int capacity;
 	private int pyeong;
 	private long userId;
+	private long imageId;
 
 	public KitchenInfoEntity toEntity() {
-		KitchenInfoEntity build = KitchenInfoEntity.builder().id(id).name(name).address(address).telNum(telNum)
-				.bizReport(bizReport).lat(lat).lng(lng).capacity(capacity).pyeong(pyeong).userId(userId).build();
+		KitchenInfoEntity build = KitchenInfoEntity.builder().id(id).name(name).address(address)
+				.telNum(telNum).bizReport(bizReport).lat(lat).lng(lng).capacity(capacity).pyeong(pyeong)
+				.userId(userId).imageId(imageId).build();
 		return build;
 	}
 
 	@Builder
 	public KitchenDto(Long id, String name, String address, String telNum, String bizReport, double lat, double lng,
-			int capacity, int pyeong, long userId) {
+			int capacity, int pyeong, long userId, long imageId) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
@@ -44,5 +45,6 @@ public class KitchenDto {
 		this.capacity = capacity;
 		this.pyeong = pyeong;
 		this.userId = userId;
+		this.imageId = imageId;
 	}
 }

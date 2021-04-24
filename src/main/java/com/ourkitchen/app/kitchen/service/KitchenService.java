@@ -36,7 +36,7 @@ log.info("----------kitchenDtoList : {}", "doService.getKitchenList");
 		
 		Page<KitchenInfoEntity> page = kitchenInfoRepository
 				.findAll(PageRequest
-						.of(pageNum-1, PAGE_POST_COUNT, Sort.by(Sort.Direction.ASC, "createdDate")));
+						.of(pageNum-1, PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "createdDate")));
 log.info("----------kitchenDtoList : {}", "doService.page");
 		//List<KitchenInfoEntity> kitchens = kitchenInfoRepository.findAll();
 		List<KitchenInfoEntity> kitchens = page.getContent();
@@ -44,11 +44,7 @@ log.info("----------kitchenDtoList : {}", "doService.page");
 
 log.info("----------kitchenInfoEntity : {}", kitchens);
 		for (KitchenInfoEntity kitchen : kitchens) {
-			KitchenDto kitchenDto = KitchenDto.builder().id(kitchen.getId()).name(kitchen.getName())
-					.address(kitchen.getAddress()).telNum(kitchen.getTelNum()).bizReport(kitchen.getBizReport())
-					.lat(kitchen.getLat()).lng(kitchen.getLng()).capacity(kitchen.getCapacity())
-					.pyeong(kitchen.getPyeong()).build();
-			kitchenDtoList.add(kitchenDto);
+			kitchenDtoList.add(this.convertEntityToDto(kitchen));
 		}
 		
 		return kitchenDtoList;
@@ -73,7 +69,7 @@ log.info("----------searchPosts : {}", kitchens);
 		return KitchenDto.builder().id(kitchen.getId()).name(kitchen.getName()).address(kitchen.getAddress())
 				.telNum(kitchen.getTelNum()).bizReport(kitchen.getBizReport()).lat(kitchen.getLat())
 				.lng(kitchen.getLng()).capacity(kitchen.getCapacity()).pyeong(kitchen.getPyeong())
-				.userId(kitchen.getUserId()).build();
+				.userId(kitchen.getUserId()).imageId(kitchen.getImageId()).build();
 	}
 	
 	public Integer[] getPageList(Integer curPageNum) {

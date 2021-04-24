@@ -12,10 +12,13 @@
 		<span id="error-msg" th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
 	</th:block> 
 	
-    <form th:action="@{/kitchen/write}" method="post">
+    <form th:action="@{/kitchen/write}" method="post" enctype="multipart/form-data">
         <table>
-        	<tr><td><input type="text" name="name" placeholder="주방명" th:maxlength=20></td></tr>
         	<tr>
+        		<td>제목</td><td><input type="text" name="name" placeholder="주방명" th:maxlength=20></td>
+       		</tr>
+        	<tr>
+        		<td>우편번호</td>
         		<td><input type="text" id="sample4_postcode" placeholder="우편번호">
 					<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 					<input type="text" name="address" id="sample4_roadAddress" placeholder="도로명주소">
@@ -25,10 +28,20 @@
 					<input type="text" id="sample4_extraAddress" placeholder="참고항목">
 				</td>
 			</tr>
-        	<tr><td><input type="text" name="telNum" placeholder="전화번호('-'제외)" th:maxlength=11></td></tr>
-        	<tr><td><input type="number" name="capacity" placeholder="수용 가능 인원" th:min=0> 명</td></tr>
-        	<tr><td><input type="number" name="pyeong" placeholder="평수" th:min=0> 평</td></tr>
-        	<tr><td><button type="submit">주방 등록</button></td></tr>
+			<tr>
+				<td>이미지</td><td><input name="file" type="file" id="customFile" placeholder="이미지"></td>
+			</tr>
+        	<tr>
+        		<td>전화번호</td><td><input type="text" name="telNum" placeholder="전화번호('-'제외)" th:maxlength=11></td>
+       		</tr>
+        	<tr>
+        	<tr>
+        		<td>수용가능인원</td><td><input type="number" name="capacity" placeholder="수용 가능 인원" th:min=0> 명</td></tr>
+        	<tr>
+        		<td>평수</td><td><input type="number" name="pyeong" placeholder="평수" th:min=0> 평</td></tr>
+        	<tr>
+        		<td><button type="submit">주방 등록</button></td>
+       		</tr>
        	</table>
     </form>
     
