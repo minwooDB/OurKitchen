@@ -14,14 +14,16 @@ import lombok.ToString;
 @NoArgsConstructor
 public class FileDto {
 	private Long id;
-	private String orgName;
+	private Long kitchenId;
+	private String orgFileName;
 	private String fileName;
 	private String filePath;
 	
 	public KitchenImageEntity toEntity() {
 		KitchenImageEntity build = KitchenImageEntity.builder()
 				.id(id)
-				.orgName(orgName)
+				.kitchenId(kitchenId)
+				.orgFileName(orgFileName)
 				.fileName(fileName)
 				.filePath(filePath)
 				.build();
@@ -29,9 +31,10 @@ public class FileDto {
 	}
 	
 	@Builder
-	public FileDto(Long id, String orgName, String fileName, String filePath) {
+	public FileDto(Long id, Long kitchenId, String orgFileName, String fileName, String filePath) {
 		this.id = id;
-		this.orgName = orgName;
+		this.kitchenId = kitchenId;
+		this.orgFileName = orgFileName;
 		this.fileName = fileName;
 		this.filePath = filePath;
 	}

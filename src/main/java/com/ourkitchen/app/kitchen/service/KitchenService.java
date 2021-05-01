@@ -29,7 +29,7 @@ public class KitchenService {
 	public Long addKitchenDetail(KitchenDto kitchenDto) {
 		return kitchenInfoRepository.save(kitchenDto.toEntity()).getId();
 	}
-
+	
 	@Transactional
 	public List<KitchenDto> getKitchenList(Integer pageNum) {
 log.info("----------kitchenDtoList : {}", "doService.getKitchenList");
@@ -41,12 +41,11 @@ log.info("----------kitchenDtoList : {}", "doService.page");
 		//List<KitchenInfoEntity> kitchens = kitchenInfoRepository.findAll();
 		List<KitchenInfoEntity> kitchens = page.getContent();
 		List<KitchenDto> kitchenDtoList = new ArrayList<>();
-
+	
 log.info("----------kitchenInfoEntity : {}", kitchens);
 		for (KitchenInfoEntity kitchen : kitchens) {
 			kitchenDtoList.add(this.convertEntityToDto(kitchen));
-		}
-		
+		}		
 		return kitchenDtoList;
 	}
 

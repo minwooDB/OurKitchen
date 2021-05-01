@@ -21,8 +21,11 @@ public class KitchenImageEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
-	private String orgName;
+	@Column(name="kitchen_id", nullable = false)
+	private Long kitchenId;
+	
+	@Column(name="org_file_name", nullable = false)
+	private String orgFileName;
 	
 	@Column(name="file_name", length = 255, nullable = false)
 	private String fileName;
@@ -31,9 +34,10 @@ public class KitchenImageEntity {
 	private String filePath;
 
 	@Builder
-	public KitchenImageEntity(Long id, String orgName, String fileName, String filePath) {
+	public KitchenImageEntity(Long id, Long kitchenId, String orgFileName, String fileName, String filePath) {
 		this.id = id;
-		this.orgName = orgName;
+		this.kitchenId = kitchenId;
+		this.orgFileName = orgFileName;
 		this.fileName = fileName;
 		this.filePath = filePath;
 	}
