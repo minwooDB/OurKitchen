@@ -9,8 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.ourkitchen.enums.Classification;
-import com.ourkitchen.enums.StatusCode;
+import com.ourkitchen.utils.enums.Classification;
+import com.ourkitchen.utils.enums.StatusCode;
 
 import lombok.AccessLevel;
 import lombok.Builder;

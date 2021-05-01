@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.ourkitchen.app.auth.dto.UserDetailsImpl;
+import com.ourkitchen.app.auth.dto.UserDetails;
 import com.ourkitchen.app.auth.service.UserDetailsServiceImpl;
 
 import lombok.NonNull;
@@ -26,7 +26,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider{
 		UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken)authentication;
 		String email = (String)token.getPrincipal();
 		String pwd = (String)token.getCredentials();
-		UserDetailsImpl userDetailsImpl = (UserDetailsImpl) userService.loadUserByUsername(email);
+		UserDetails userDetailsImpl = (UserDetails) userService.loadUserByUsername(email);
 		
 		if(!pwdEncoder.matches(pwd, userDetailsImpl.getPassword())) {
 			throw new BadCredentialsException(userDetailsImpl.getUsername()+" Invaild password");

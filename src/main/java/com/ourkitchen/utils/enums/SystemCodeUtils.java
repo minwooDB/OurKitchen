@@ -1,4 +1,4 @@
-package com.ourkitchen.enums;
+package com.ourkitchen.utils.enums;
 
 public class SystemCodeUtils {
 	public final static String RESERVATION_CANCEL = StatusCode.C00.toString();

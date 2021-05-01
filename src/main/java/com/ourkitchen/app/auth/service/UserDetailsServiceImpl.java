@@ -1,61 +1,69 @@
 package com.ourkitchen.app.auth.service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ourkitchen.app.auth.dto.UserDetailsImpl;
+import com.ourkitchen.app.auth.dto.UserDetails;
 import com.ourkitchen.app.data.entity.UserEntity;
 import com.ourkitchen.app.data.repository.UserRepository;
-import com.ourkitchen.enums.Role;
-import com.ourkitchen.enums.StatusCode;
+import com.ourkitchen.utils.constants.SystemCodeConstants;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@Service("userService")
-@AllArgsConstructor
+@RequiredArgsConstructor
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService{
 	
-	private UserRepository userRepo;
+	private final UserRepository userRepo;
 	
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		UserEntity userEntity = userRepo.findByEmail(email);
-		
-		if(userEntity==null) throw new UsernameNotFoundException("can not found user");
-		
-		log.debug("login user email: {}", userEntity.getEmail());
-		
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		
-		if(StringUtils.equals(email, "ourkitchen_admin@example.com")) {
-			authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
-		}else {
-			authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
-		}
-		
-		return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
+	@Transactional
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+		Optional<UserEntity> oUserEntity = userRepo.findByEmail(username);
+		UserEntity user = oUserEntity.orElseThrow(() -> new UsernameNotFoundException(String.format("[%s]는 없는 회원 이메일입니다.", username)));
+		boolean isEnabled = StringUtils.equals(user.getActive().getCode(), SystemCodeConstants.ACCOUNT_ACTIVE);
+		boolean isNonExpired = true;
+		boolean passwordNonExpired = true;
+		boolean isNonLocked = !StringUtils.equals(user.getActive().getCode(), SystemCodeConstants.ACCOUNT_DORMANT);
+		return new UserDetails(user, isEnabled, isNonExpired, passwordNonExpired, isNonLocked);
 	}
 	
 	@Transactional
-	public Long joinUser(UserDetailsImpl userDto) {
-		BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
-		userDto.setPassword(pwEncoder.encode(userDto.getPassword()));
-		userDto.setActive(StatusCode.C01);
-		userDto.setLastLogin(LocalDateTime.now());
-		return userRepo.save(userDto.toEntity()).getId();
+    public int setBadCredentialsByUsername(String email) throws UsernameNotFoundException {
+
+    	userRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(String.format("[%s]는 없는 회원 이메일입니다.", email)));
+
+        return 0;
+    }
+
+    @Transactional
+	public boolean setAuthnSuccessByUsername(String email) {
+        try {
+
+    		Optional<UserEntity> oUserEntity = userRepo.findByEmail(email);
+    		
+    		UserEntity user = oUserEntity.orElseThrow(() -> new UsernameNotFoundException(String.format("[%s]는 없는 회원 이메일입니다.", email)));
+    		
+    		user.setLastLogin(LocalDateTime.now());
+
+            userRepo.save(user);
+
+            return true;
+
+        } catch (UsernameNotFoundException ex) {
+
+            log.debug("setAuthnSuccessByUsername : {}", ex.getMessage());
+
+            return false;
+        }
 	}
 }
