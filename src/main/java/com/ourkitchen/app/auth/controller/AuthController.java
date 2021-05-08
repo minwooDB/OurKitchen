@@ -22,6 +22,11 @@ import lombok.extern.log4j.Log4j2;
 public class AuthController {
 	
 	private final UserService userService;
+
+	@RequestMapping("/login")
+	public String loginForm() {
+		return "login";
+	}
 	
 	@GetMapping("/signup")
 	public String dispSignup() {
@@ -32,7 +37,6 @@ public class AuthController {
 	public String signup(@Valid UserDto userDto, BindingResult errors) {
         if(errors.hasErrors()) {
             //model.addAttribute("member", userDto);
-            //model.addAttribute("roles", codeDetailService.findSelectableRoles());
             //model.addAllAttributes(memAuthService.validateHandling(errors));
             return "register";
         }
@@ -45,8 +49,4 @@ public class AuthController {
 		return "main";
 	}
 	
-	@RequestMapping("/login")
-	public String loginForm() {
-		return "login";
-	}
 }

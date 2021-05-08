@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ourkitchen.app.data.entity.KitchenInfoEntity;
-import com.ourkitchen.app.data.repository.KitchenInfoRepository;
 import com.ourkitchen.app.kitchen.dto.KitchenDto;
+import com.ourkitchen.data.entity.KitchenInfoEntity;
+import com.ourkitchen.data.repository.KitchenInfoRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;

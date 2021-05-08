@@ -3,7 +3,7 @@ package com.ourkitchen.app.auth.dto;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 
-import com.ourkitchen.app.data.entity.UserEntity;
+import com.ourkitchen.data.entity.UserEntity;
 
 import lombok.Getter;
 

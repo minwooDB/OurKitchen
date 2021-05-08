@@ -1,7 +1,7 @@
 package com.ourkitchen.app.kitchen.dto;
 
-import com.ourkitchen.app.data.entity.KitchenInfoEntity;
-import com.ourkitchen.app.data.entity.UserEntity;
+import com.ourkitchen.data.entity.KitchenInfoEntity;
+import com.ourkitchen.data.entity.UserEntity;
 
 import lombok.Builder;
 import lombok.Getter;
