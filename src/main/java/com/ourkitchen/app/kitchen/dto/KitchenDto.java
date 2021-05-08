@@ -1,5 +1,9 @@
 package com.ourkitchen.app.kitchen.dto;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.ourkitchen.app.data.entity.KitchenInfoEntity;
 
 import lombok.Builder;
@@ -23,12 +27,12 @@ public class KitchenDto {
 	private int capacity;
 	private int pyeong;
 	private long userId;
-	private long imageId;
+	private List<MultipartFile> files;
 
 	public KitchenInfoEntity toEntity() {
 		KitchenInfoEntity build = KitchenInfoEntity.builder().id(id).name(name).address(address)
 				.telNum(telNum).bizReport(bizReport).lat(lat).lng(lng).capacity(capacity).pyeong(pyeong)
-				.userId(userId).imageId(imageId).build();
+				.build();
 		return build;
 	}
 
@@ -45,6 +49,5 @@ public class KitchenDto {
 		this.capacity = capacity;
 		this.pyeong = pyeong;
 		this.userId = userId;
-		this.imageId = imageId;
 	}
 }

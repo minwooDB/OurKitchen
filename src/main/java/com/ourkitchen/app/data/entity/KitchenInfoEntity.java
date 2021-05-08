@@ -1,10 +1,16 @@
 package com.ourkitchen.app.data.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -51,15 +57,17 @@ public class KitchenInfoEntity extends TimeEntity{
 	@Column(name="pyeong", nullable = true)
 	private int pyeong;
 	
-	@Column(name="user_id", nullable = true)
-	private long userId;
-	 
-	@Column
-	private long imageId;
-	 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id", nullable = true)
+	private UserEntity user;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name="kitchen_id")
+	private List<KitchenImageEntity> kitchenImages;
+	
 	@Builder
 	public KitchenInfoEntity(Long id, String name, String address, String telNum, String bizReport,
-			double lat ,double lng, int capacity, int pyeong, long userId, long imageId) {
+			double lat ,double lng, int capacity, int pyeong, UserEntity user) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
@@ -69,7 +77,6 @@ public class KitchenInfoEntity extends TimeEntity{
 		this.lng = lng;
 		this.capacity = capacity;
 		this.pyeong = pyeong;
-		this.userId = userId;
-		this.imageId = imageId;
+		this.user = user;
 	}
 }

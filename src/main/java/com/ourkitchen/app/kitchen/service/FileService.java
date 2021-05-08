@@ -9,20 +9,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ourkitchen.app.data.entity.KitchenImageEntity;
 import com.ourkitchen.app.data.repository.KitchenImageRepository;
-import com.ourkitchen.app.kitchen.controller.KitchenController;
 import com.ourkitchen.app.kitchen.dto.FileDto;
-import com.ourkitchen.util.MD5Generator;
+import com.ourkitchen.utils.MD5Generator;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+@RequiredArgsConstructor
 @Log4j2
 @Service
 public class FileService {
-	private KitchenImageRepository kitchenImageRepository;
+	private final KitchenImageRepository kitchenImageRepository;
 
-	public FileService(KitchenImageRepository kitchenImageRepository) {
-		this.kitchenImageRepository = kitchenImageRepository;
-	}
 
 	@Transactional
 	public Long addKitchenImages(Long kitchenId, List<MultipartFile> files) {

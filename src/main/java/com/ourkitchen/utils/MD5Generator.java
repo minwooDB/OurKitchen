@@ -1,4 +1,4 @@
-package com.ourkitchen.util;
+package com.ourkitchen.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

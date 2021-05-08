@@ -11,14 +11,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.ourkitchen.enums.Classification;
-import com.ourkitchen.enums.StatusCode;
+import org.apache.commons.lang3.StringUtils;
+
+import com.ourkitchen.utils.constants.SystemCodeConstants;
+import com.ourkitchen.utils.enums.Role;
+import com.ourkitchen.utils.enums.StatusCode;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Builder
@@ -27,8 +31,9 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = {"id"})
 @Getter
+@Setter
 @Table(name="user")
-public class UserEntity {
+public class UserEntity extends TimeEntity{
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,29 +48,33 @@ public class UserEntity {
 	@Column(name="password", length = 255, nullable = false)
 	private String password;
 	
-	@Column(name="phone_num", length = 30, nullable = false)
+	@Column(name="phone_num", length = 30)
 	private String phoneNum;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="classification", nullable = false)
-	private Classification classification;
+	@Column(name="role", nullable = false)
+	private Role role;
 	
-	@Column(name="last_login", nullable = false)
+	@Column(name="last_login")
 	private LocalDateTime lastLogin;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="active", nullable = false)
+	@Column(name="active")
 	private StatusCode active;
 
 	@Builder
-	public UserEntity(Long id, String email, String name, String password, String phoneNum, Classification classification, StatusCode active, LocalDateTime lastLogin) {
+	public UserEntity(Long id, String email, String name, String password, String phoneNum, Role role, StatusCode active, LocalDateTime lastLogin) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
 		this.password = password;
 		this.phoneNum = phoneNum;
-		this.classification = classification;
+		this.role = role;
 		this.active = active;
 		this.lastLogin = lastLogin;
+	}
+	
+	public boolean isActive() {
+		return StringUtils.equals(getActive().toString(), SystemCodeConstants.ACCOUNT_ACTIVE);
 	}
 }

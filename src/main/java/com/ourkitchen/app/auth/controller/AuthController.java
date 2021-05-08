@@ -1,13 +1,17 @@
 package com.ourkitchen.app.auth.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ourkitchen.app.auth.dto.UserDetailsImpl;
-import com.ourkitchen.app.auth.service.UserDetailsServiceImpl;
+import com.ourkitchen.app.auth.dto.UserDto;
+import com.ourkitchen.app.auth.service.UserService;
+import com.ourkitchen.exception.UserAlreadyExistsException;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,51 +21,33 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class AuthController {
 	
-	@Autowired
-	private UserDetailsServiceImpl userDetailService;
+	private final UserService userService;
 	
-	@GetMapping("/")
-	public String index() {
-		return "index";
-	}
-	@GetMapping("/auth/signup") //회원가입 페이지
+	@GetMapping("/signup")
 	public String dispSignup() {
-		return "auth/signup";
+		return "signup";
 	}
 	
-	@PostMapping("/auth/signup") //회원가입 처리
-	public String execSignup(UserDetailsImpl dto) {
-		log.debug("----------join user id: {}", dto.getEmail());
-		userDetailService.joinUser(dto);
-		
-		return "redirect:/auth/login";
+	@PostMapping("/signup")
+	public String signup(@Valid UserDto userDto, BindingResult errors) {
+        if(errors.hasErrors()) {
+            //model.addAttribute("member", userDto);
+            //model.addAttribute("roles", codeDetailService.findSelectableRoles());
+            //model.addAllAttributes(memAuthService.validateHandling(errors));
+            return "register";
+        }
+
+		try {
+	log.info("----------userDto : {}", userDto);
+			userService.signup(userDto);
+		} catch (UserAlreadyExistsException e) {
+			errors.addError(new ObjectError("error_email", e.getMessage()));
+		}
+		return "main";
 	}
 	
-	@GetMapping("/auth/login")
-	public String dispLogin() {
-		return "auth/login";
-	}
-	
-	@PostMapping("/auth/login")
-	public String dispLoginResult() {
-		
-		
-		return "redirect:/";
-	}
-	
-	@GetMapping("/auth/logout/result")
-	public String dispLogout() {
-		return "auth/logout";
-	}
-	
-	@GetMapping("/auth/denied")
-	public String dispDenied() {
-		return "auth/denied";
-	}
-	
-	@PreAuthorize("hasRole('ROLE_MEMBER')")
-	@GetMapping("/auth/info")
-	public String dispMyInfo() {
-		return "auth/myinfo";
+	@RequestMapping("/login")
+	public String loginForm() {
+		return "login";
 	}
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ourkitchen.app.auth.dto.UserDetails;
 import com.ourkitchen.app.kitchen.dto.FileDto;
 import com.ourkitchen.app.kitchen.dto.KitchenDto;
 import com.ourkitchen.app.kitchen.service.FileService;
@@ -42,19 +44,27 @@ log.info("----------kitchenDtoList : {}", kitchenDtoList);
 		return "kitchen/list.html";
 	}
 
-	@GetMapping("/kitchen/write")
-	public String dispKitchenWrite() {
-		return "/kitchen/write";
+	@GetMapping("/kitchen/form/save")
+	public String saveKitchenForm() {
+		return "/kitchen/save_form";
 	}
 
-	@PostMapping("kitchen/write")
-	public String addKitchenDetail(KitchenDto kitchenDto, @RequestParam("files") List<MultipartFile> files)
+	/**
+	 * 주방 정보 등록
+	 * @param kitchenDto
+	 * @param files
+	 * @return
+	 * @throws IOException
+	 */
+	
+	@PostMapping("kitchen")
+	public String addKitchenDetail(@AuthenticationPrincipal UserDetails userDetails, KitchenDto kitchenDto, @RequestParam("files") List<MultipartFile> files)
 			throws IOException {
 		try {
 log.info("----------do KitchenController : addKitchenDetail");
 	
 			/* SOMI - 수정 */
-			kitchenDto.setUserId(1); // springSecurityUser.getId()
+			kitchenDto.setUserId(userDetails.getUser().getId());
 			kitchenDto.setLat(37.5602);
 			kitchenDto.setLng(126.9847);
 			Long kitchenId = kitchenService.addKitchenDetail(kitchenDto);
