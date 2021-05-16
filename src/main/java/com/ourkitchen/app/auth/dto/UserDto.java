@@ -53,4 +53,5 @@ public class UserDto {
 				.active(StatusCode.valueOf(SystemCodeConstants.ACCOUNT_ACTIVE))
 				.build();
 	}
+	
 }
