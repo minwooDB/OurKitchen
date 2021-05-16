@@ -1,4 +1,4 @@
-package com.ourkitchen.app.data.entity;
+package com.ourkitchen.data.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

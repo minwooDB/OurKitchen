@@ -6,7 +6,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ourkitchen.app.data.entity.UserEntity;
+import com.ourkitchen.data.entity.UserEntity;
 import com.ourkitchen.utils.constants.SystemCodeConstants;
 import com.ourkitchen.utils.enums.Role;
 import com.ourkitchen.utils.enums.StatusCode;

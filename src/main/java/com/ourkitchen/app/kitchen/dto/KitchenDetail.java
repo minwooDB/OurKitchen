@@ -16,7 +16,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class KitchenDto {
+public class KitchenDetail {
 	private Long id;
 	private String name;
 	private String address;
@@ -36,7 +36,7 @@ public class KitchenDto {
 	}
 
 	@Builder
-	public KitchenDto(Long id, String name, String address, String telNum, String bizReport, double lat, double lng,
+	public KitchenDetail(Long id, String name, String address, String telNum, String bizReport, double lat, double lng,
 			int capacity, int pyeong, long userId, long imageId) {
 		this.id = id;
 		this.name = name;
@@ -49,8 +49,8 @@ public class KitchenDto {
 		this.pyeong = pyeong;
 	}
 	
-	public static KitchenDto convertEntityToDto(KitchenInfoEntity kitchen) {
-		return KitchenDto.builder().id(kitchen.getId()).name(kitchen.getName()).address(kitchen.getAddress())
+	public KitchenDetail convertEntityToDto(KitchenInfoEntity kitchen) {
+		return KitchenDetail.builder().id(kitchen.getId()).name(kitchen.getName()).address(kitchen.getAddress())
 				.telNum(kitchen.getTelNum()).bizReport(kitchen.getBizReport()).lat(kitchen.getLat())
 				.lng(kitchen.getLng()).capacity(kitchen.getCapacity()).pyeong(kitchen.getPyeong())
 				.build();

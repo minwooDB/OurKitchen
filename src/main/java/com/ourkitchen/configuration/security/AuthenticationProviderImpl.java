@@ -1,4 +1,4 @@
-package com.ourkitchen.app.auth.provider;
+package com.ourkitchen.configuration.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;

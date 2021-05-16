@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ourkitchen.app.auth.dto.UserDetails;
-import com.ourkitchen.app.kitchen.dto.FileDto;
+import com.ourkitchen.app.kitchen.dto.KitchenDetail;
 import com.ourkitchen.app.kitchen.dto.KitchenDto;
 import com.ourkitchen.app.kitchen.service.FileService;
 import com.ourkitchen.app.kitchen.service.KitchenService;
+import com.ourkitchen.data.entity.KitchenInfoEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -58,18 +59,16 @@ log.info("----------kitchenDtoList : {}", kitchenDtoList);
 	 */
 	
 	@PostMapping("kitchen")
-	public String addKitchenDetail(@AuthenticationPrincipal UserDetails userDetails, KitchenDto kitchenDto, @RequestParam("files") List<MultipartFile> files)
+	public String addKitchenDetail(@AuthenticationPrincipal UserDetails userDetails, KitchenDetail kitchenDetail, @RequestParam("files") List<MultipartFile> files)
 			throws IOException {
 		try {
 log.info("----------do KitchenController : addKitchenDetail");
-	
 			/* SOMI - 수정 */
-			kitchenDto.setUserId(userDetails.getUser().getId());
-			kitchenDto.setLat(37.5602);
-			kitchenDto.setLng(126.9847);
-			Long kitchenId = kitchenService.addKitchenDetail(kitchenDto);
-log.info("----------kitchen Dto : {}", kitchenDto.toString());
-			
+			KitchenInfoEntity kitchen = kitchenDetail.toEntity();
+			kitchen.setUser(userDetails.getUser());
+			kitchen = kitchenService.addKitchenDetail(kitchen);
+log.info("----------kitchen Dto : {}", kitchenDetail.toString());
+			long kitchenId = kitchen.getId();
 			fileService.addKitchenImages(kitchenId, files);
 		} catch (Exception e) {
 			e.printStackTrace();

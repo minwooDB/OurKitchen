@@ -1,4 +1,4 @@
-package com.ourkitchen.app.data.entity;
+package com.ourkitchen.data.entity;
 
 import java.util.List;
 
@@ -18,6 +18,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Builder
@@ -26,6 +27,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = {"id"})
 @Getter
+@Setter
 @Table(name="Kitchen_info")
 public class KitchenInfoEntity extends TimeEntity{
 	@Id
@@ -67,7 +69,7 @@ public class KitchenInfoEntity extends TimeEntity{
 	
 	@Builder
 	public KitchenInfoEntity(Long id, String name, String address, String telNum, String bizReport,
-			double lat ,double lng, int capacity, int pyeong, UserEntity user) {
+			double lat ,double lng, int capacity, int pyeong, UserEntity user, List<KitchenImageEntity> kitchenImages) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
@@ -78,5 +80,6 @@ public class KitchenInfoEntity extends TimeEntity{
 		this.capacity = capacity;
 		this.pyeong = pyeong;
 		this.user = user;
+		this.kitchenImages = kitchenImages;
 	}
 }

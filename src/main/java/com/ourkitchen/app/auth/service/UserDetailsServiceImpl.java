@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ourkitchen.app.auth.dto.UserDetails;
-import com.ourkitchen.app.data.entity.UserEntity;
-import com.ourkitchen.app.data.repository.UserRepository;
+import com.ourkitchen.data.entity.UserEntity;
+import com.ourkitchen.data.repository.UserRepository;
 import com.ourkitchen.utils.constants.SystemCodeConstants;
 
 import lombok.RequiredArgsConstructor;

@@ -7,8 +7,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ourkitchen.app.auth.dto.UserDto;
-import com.ourkitchen.app.data.entity.UserEntity;
-import com.ourkitchen.app.data.repository.UserRepository;
+import com.ourkitchen.data.entity.UserEntity;
+import com.ourkitchen.data.repository.UserRepository;
 import com.ourkitchen.exception.UserAlreadyExistsException;
 
 import lombok.RequiredArgsConstructor;

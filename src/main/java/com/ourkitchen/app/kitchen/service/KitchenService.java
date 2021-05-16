@@ -9,9 +9,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ourkitchen.app.data.entity.KitchenInfoEntity;
-import com.ourkitchen.app.data.repository.KitchenInfoRepository;
 import com.ourkitchen.app.kitchen.dto.KitchenDto;
+import com.ourkitchen.data.entity.KitchenInfoEntity;
+import com.ourkitchen.data.repository.KitchenInfoRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -26,8 +26,8 @@ public class KitchenService {
 	private static final int PAGE_POST_COUNT = 9; // 한 페이지에 존재하는 게시글 수
 
 	@Transactional
-	public Long addKitchenDetail(KitchenDto kitchenDto) {
-		return kitchenInfoRepository.save(kitchenDto.toEntity()).getId();
+	public KitchenInfoEntity addKitchenDetail(KitchenInfoEntity kitchen) {
+		return kitchenInfoRepository.save(kitchen);
 	}
 	
 	@Transactional
@@ -44,7 +44,7 @@ log.info("----------kitchenDtoList : {}", "doService.page");
 	
 log.info("----------kitchenInfoEntity : {}", kitchens);
 		for (KitchenInfoEntity kitchen : kitchens) {
-			kitchenDtoList.add(this.convertEntityToDto(kitchen));
+			kitchenDtoList.add(KitchenDto.convertEntityToDto(kitchen));
 		}		
 		return kitchenDtoList;
 	}
@@ -58,18 +58,12 @@ log.info("----------searchPosts : {}", kitchens);
 		if (kitchens.isEmpty())
 			return kitchenDtoList;
 		for (KitchenInfoEntity kitchen : kitchens) {
-			kitchenDtoList.add(this.convertEntityToDto(kitchen));
+			kitchenDtoList.add(KitchenDto.convertEntityToDto(kitchen));
 		}
 
 		return kitchenDtoList;
 	}
 
-	public KitchenDto convertEntityToDto(KitchenInfoEntity kitchen) {
-		return KitchenDto.builder().id(kitchen.getId()).name(kitchen.getName()).address(kitchen.getAddress())
-				.telNum(kitchen.getTelNum()).bizReport(kitchen.getBizReport()).lat(kitchen.getLat())
-				.lng(kitchen.getLng()).capacity(kitchen.getCapacity()).pyeong(kitchen.getPyeong())
-				.userId(kitchen.getUserId()).imageId(kitchen.getImageId()).build();
-	}
 	
 	public Integer[] getPageList(Integer curPageNum) {
 		Integer[] pageList = new Integer[BLOCK_PATE_NUM_COUNT];

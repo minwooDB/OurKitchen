@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ourkitchen.app.data.entity.KitchenImageEntity;
-import com.ourkitchen.app.data.repository.KitchenImageRepository;
 import com.ourkitchen.app.kitchen.dto.FileDto;
+import com.ourkitchen.data.entity.KitchenImageEntity;
+import com.ourkitchen.data.repository.KitchenImageRepository;
 import com.ourkitchen.utils.MD5Generator;
 
 import lombok.RequiredArgsConstructor;
