@@ -12,10 +12,10 @@
 		<span id="error-msg" th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
 	</th:block> 
 	
-    <form th:action="@{/kitchen/write}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/kitchen}" method="post" enctype="multipart/form-data">
         <table>
         	<tr>
-        		<td>제목</td><td><input type="text" name="name" placeholder="주방명" th:maxlength=20></td>
+        		<td>제목</td><td><input type="text" name="name" placeholder="주방명" th:maxlength="20"></td>
        		</tr>
         	<tr>
         		<td>우편번호</td>
@@ -29,7 +29,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>이미지</td><td><input multiple name="file" type="file" id="customFile" placeholder="이미지"></td>
+				<td>이미지</td><td><input multiple name="files" type="file" id="customFile" placeholder="이미지"></td>
 			</tr>
         	<tr>
         		<td>전화번호</td><td><input type="text" name="telNum" placeholder="전화번호('-'제외)" th:maxlength=11></td>

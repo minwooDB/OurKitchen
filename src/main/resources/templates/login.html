@@ -11,7 +11,7 @@
 		<span id="error-msg" th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
 	</th:block> 
 	
-    <form th:action="@{/auth/login}" method="post">
+    <form th:action="@{/login}" method="post">
         <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
 		
         <input type="text" name="username" placeholder="이메일">

@@ -8,9 +8,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.ourkitchen.app.kitchen.dto.KitchenDetail;
 import com.ourkitchen.app.kitchen.dto.KitchenDto;
 import com.ourkitchen.data.entity.KitchenInfoEntity;
+import com.ourkitchen.data.entity.UserEntity;
 import com.ourkitchen.data.repository.KitchenInfoRepository;
 
 import lombok.AllArgsConstructor;
@@ -22,12 +25,25 @@ import lombok.extern.log4j.Log4j2;
 public class KitchenService {
 
 	private KitchenInfoRepository kitchenInfoRepository;
+	private FileService fileService;
 	private static final int BLOCK_PATE_NUM_COUNT = 5; // 블럭에 존재하는 페이지 수
 	private static final int PAGE_POST_COUNT = 9; // 한 페이지에 존재하는 게시글 수
 
+	/**
+	 * 주방 등록
+	 * @param user
+	 * @param kitchen
+	 * @param files
+	 * @return
+	 */
 	@Transactional
-	public KitchenInfoEntity addKitchenDetail(KitchenInfoEntity kitchen) {
-		return kitchenInfoRepository.save(kitchen);
+	public KitchenInfoEntity addKitchenDetail(UserEntity user, KitchenDetail kitchenDetail, List<MultipartFile> files) {
+		KitchenInfoEntity kitchen = kitchenDetail.toEntity();
+		kitchen.setUser(user);
+		kitchen = kitchenInfoRepository.save(kitchen);
+log.info("----------kitchen : {}", kitchen.toString());
+		fileService.addKitchenImages(kitchen, files);
+		return kitchen;
 	}
 	
 	@Transactional

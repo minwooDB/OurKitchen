@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ourkitchen.app.kitchen.dto.FileDto;
 import com.ourkitchen.data.entity.KitchenImageEntity;
+import com.ourkitchen.data.entity.KitchenInfoEntity;
 import com.ourkitchen.data.repository.KitchenImageRepository;
 import com.ourkitchen.utils.MD5Generator;
 
@@ -17,13 +18,13 @@ import lombok.extern.log4j.Log4j2;
 
 @RequiredArgsConstructor
 @Log4j2
-@Service
+@Service("fileService")
 public class FileService {
 	private final KitchenImageRepository kitchenImageRepository;
 
 
 	@Transactional
-	public Long addKitchenImages(Long kitchenId, List<MultipartFile> files) {
+	public Long addKitchenImages(KitchenInfoEntity kitchen, List<MultipartFile> files) {
 		/* SOMI - 디렉토리 properties 파일에서 로딩 */
 		try {/* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
 			String savePath = "C:\\Users\\somi\\Documents\\OurKitchen\\img";
@@ -40,13 +41,14 @@ public class FileService {
 				String fileName = new MD5Generator(orgFileName).toString();
 				String filePath = savePath + "\\" + fileName;
 				file.transferTo(new File(filePath));
-				FileDto fileDto = new FileDto();
+				FileDto fileDto = new FileDto();				
+				fileDto.setKitchenId(kitchenId);
 				fileDto.setOrgFileName(orgFileName);
 				fileDto.setFileName(fileName);
 				fileDto.setFilePath(filePath);
 				fileDto.setKitchenId(kitchenId);
+log.info("----------file Dto : {}", fileDto.toString());
 				Long imageId = kitchenImageRepository.save(fileDto.toEntity()).getId();
-log.info("----------file Dto : {}", imageId.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

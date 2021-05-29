@@ -32,6 +32,12 @@ public class KitchenController {
 	@Autowired
 	private FileService fileService;
 
+	/**
+	 * 주방 조회
+	 * @param model
+	 * @param pageNum
+	 * @return
+	 */
 	@GetMapping("/kitchen")
 	public String getKitchenList(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum) {
 log.info("----------kitchenDtoList : {}", "doController");
@@ -57,19 +63,16 @@ log.info("----------kitchenDtoList : {}", kitchenDtoList);
 	 * @return
 	 * @throws IOException
 	 */
-	
-	@PostMapping("kitchen")
+	@PostMapping("/kitchen")
 	public String addKitchenDetail(@AuthenticationPrincipal UserDetails userDetails, KitchenDetail kitchenDetail, @RequestParam("files") List<MultipartFile> files)
 			throws IOException {
 		try {
 log.info("----------do KitchenController : addKitchenDetail");
-			/* SOMI - 수정 */
-			KitchenInfoEntity kitchen = kitchenDetail.toEntity();
-			kitchen.setUser(userDetails.getUser());
-			kitchen = kitchenService.addKitchenDetail(kitchen);
-log.info("----------kitchen Dto : {}", kitchenDetail.toString());
-			long kitchenId = kitchen.getId();
-			fileService.addKitchenImages(kitchenId, files);
+log.info("----------userDetails: {}", userDetails);
+log.info("----------kitchenDetail : {}", kitchenDetail);
+log.info("----------files : {}", files);
+			/* SOMI - service로 트랜잭션 처리*/
+		KitchenInfoEntity kitchen = kitchenService.addKitchenDetail(userDetails.getUser(), kitchenDetail, files);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,8 +82,8 @@ log.info("----------kitchen Dto : {}", kitchenDetail.toString());
 	@GetMapping("/kitchen/search")
 	public String search(@RequestParam(value = "keyword") String keyword,
 			@RequestParam(value = "page", defaultValue = "1") Integer pageNum, Model model) {
-		log.info("----------keyword : {}", keyword);
-		log.info("----------pageNum : {}", pageNum);
+log.info("----------keyword : {}", keyword);
+log.info("----------pageNum : {}", pageNum);
 		List<KitchenDto> kitchenDtoList = kitchenService.searchPosts(pageNum, keyword);
 
 		Integer[] pageList = kitchenService.getPageList(pageNum);
