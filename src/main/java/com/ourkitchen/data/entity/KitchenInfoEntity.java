@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = {"id"})
 @Getter
-@Table(name="Kitchen_info")
+@Table(name="kitchen_info")
 public class KitchenInfoEntity {
 	@Id
 	@Column(name="id")
