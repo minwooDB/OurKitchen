@@ -40,10 +40,13 @@ public class AnalysisDto2 {
 		this.gu_total_floating_pop_women = gu_total_floating_pop_women;
 	}
 	
-	public static AnalysisDto2 (AnalysisInfoEntity2 analysis2) {
-		return AnalysisDto.builder().id(analysis2.getId()).name(analysis.getName()).address(analysis.getAddress())
-				.telNum(analysis.getTelNum()).bizReport(analysis.getBizReport()).lat(analysis.getLat())
-				.lng(analysis.getLng()).capacity(analysis.getCapacity()).pyeong(analysis.getPyeong())
-				.build();
-	}
+	/*
+	 * public static AnalysisDto2 (AnalysisInfoEntity2 analysis2) { return
+	 * AnalysisDto.builder().id(analysis2.getId()).name(analysis.getName()).address(
+	 * analysis.getAddress())
+	 * .telNum(analysis.getTelNum()).bizReport(analysis.getBizReport()).lat(analysis
+	 * .getLat())
+	 * .lng(analysis.getLng()).capacity(analysis.getCapacity()).pyeong(analysis.
+	 * getPyeong()) .build(); }
+	 */
 }

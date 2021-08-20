@@ -1,6 +1,5 @@
 package com.ourkitchen.app.analysis.dto;
 
-import com.ourkitchen.data.entity.AnalysisEntity;
 import com.ourkitchen.data.entity.AnalysisInfoEntity;
 
 import lombok.Builder;

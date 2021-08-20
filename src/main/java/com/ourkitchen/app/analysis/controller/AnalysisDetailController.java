@@ -20,18 +20,18 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @AllArgsConstructor
 @Controller
-public class AnalysisController {
+public class AnalysisDetailController {
 
 	@Autowired
 	private AnalysisService analysisService;
 
 	/**
-	 * 주방 분석 전체 개요 조회
+	 * 주방 조회
 	 * @param model
 	 * @param pageNum
 	 * @return
 	 */
-		@GetMapping("kitchen/analysis")
+		@GetMapping("kitchen/analysis/preview")
 	public String getAnalysisList(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum) {
 log.info("----------analysisDtoList : {}", "doController");
 		List<AnalysisDto> analysisDtoList = analysisService.getAnalysisList(pageNum);

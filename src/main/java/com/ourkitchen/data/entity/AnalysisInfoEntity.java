@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.jpa.repository.Query;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -29,8 +31,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @Table(name="Preview_info")
-  
 public class AnalysisInfoEntity{
+  
   @Id
   @Column(name="id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
