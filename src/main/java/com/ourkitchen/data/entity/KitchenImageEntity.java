@@ -24,27 +24,34 @@ public class KitchenImageEntity {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="kitchen_id")
 	private KitchenInfoEntity kitchenInfo;
 	
-	@Column(name="org_file_name", nullable = false)
+	@Column(name="org_file_name", nullable = true)
 	private String orgFileName;
 	
-	@Column(name="file_name", length = 255, nullable = false)
+	@Column(name="file_name", length = 255, nullable = true)
 	private String fileName;
 	
-	@Column(name="file_path", length = 255, nullable = false)
+	@Column(name="file_path", length = 255, nullable = true)
 	private String filePath;
 
 	@Builder
-	public KitchenImageEntity(Long id, KitchenInfoEntity kitchenInfo, String orgFileName, String fileName, String filePath) {
+	public KitchenImageEntity(Integer id, KitchenInfoEntity kitchenInfo, String orgFileName, String fileName, String filePath) {
 		this.id = id;
 		this.kitchenInfo = kitchenInfo;
 		this.orgFileName = orgFileName;
 		this.fileName = fileName;
 		this.filePath = filePath;
 	}
+//	
+//    public void setKitchenInfo(KitchenInfoEntity kitchenInfo){
+//        this.kitchenInfo = kitchenInfo;
+//
+//        if(!kitchenInfo.getKitchenImages().contains(this))
+//            kitchenInfo.getKitchenImages().add(this);
+//    }
 }

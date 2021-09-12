@@ -2,6 +2,7 @@ package com.ourkitchen.app.kitchen.service;
 
 import java.io.File;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class FileService {
 
 
 	@Transactional
-	public Long addKitchenImages(KitchenInfoEntity kitchen, List<MultipartFile> files) {
+	public Integer addKitchenImages(KitchenInfoEntity kitchen, List<MultipartFile> files) {
 		/* SOMI - 디렉토리 properties 파일에서 로딩 */
 		try {/* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
 			String savePath = "C:\\Users\\somi\\Documents\\OurKitchen\\img";
@@ -41,33 +42,64 @@ public class FileService {
 				String fileName = new MD5Generator(orgFileName).toString();
 				String filePath = savePath + "\\" + fileName;
 				file.transferTo(new File(filePath));
+				
+				//1
 				FileDto fileDto = new FileDto();				
-				fileDto.setKitchenId(kitchenId);
 				fileDto.setOrgFileName(orgFileName);
 				fileDto.setFileName(fileName);
 				fileDto.setFilePath(filePath);
-				fileDto.setKitchenId(kitchenId);
 log.info("----------file Dto : {}", fileDto.toString());
-				Long imageId = kitchenImageRepository.save(fileDto.toEntity()).getId();
+
+				//2 filedto.toEntity()
+			KitchenImageEntity kitchenImage = KitchenImageEntity.builder()
+			.kitchenInfo(kitchen)
+			.orgFileName(orgFileName)
+			.filePath(filePath)
+			.fileName(fileName)
+			.build();
+
+				//3
+				Integer imageId = kitchenImageRepository.save(kitchenImage).getId();
+log.info("----------imageId : {}", imageId);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return kitchenId;
-
+		return kitchen.getId();
 	}
 
 	@Transactional
-	public Long saveFile(FileDto fileDto) {
+	public Integer saveFile(FileDto fileDto) {
 		return kitchenImageRepository.save(fileDto.toEntity()).getId();
 	}
-
-	@Transactional
-	public FileDto getFile(Long id) {
-		KitchenImageEntity kitchenImage = kitchenImageRepository.findById(id).get();
-
-		FileDto fileDto = FileDto.builder().id(id).orgFileName(kitchenImage.getOrgFileName())
-				.fileName(kitchenImage.getFileName()).filePath(kitchenImage.getFilePath()).build();
-		return fileDto;
-	}
+		
+	/**
+	 * 이미지 개별 조회
+	 */
+//	@Transactional(readOnly=true)
+//	public FileDto findByFileId(Integer imageId) {
+//		// SOMI 이미지 없는 exception
+//		
+//		KitchenImageEntity entity = KitchenImageRepository.findBy(imageId);
+//		
+//		// SOMI - filedto
+//		FileDto fileDto = FileDto.builder()
+//                .orgFileName(entity.getOrgFileName())
+//                .filePath(entity.getFilePath())
+//                .fileName(entity.getFileName())
+//                .build();
+//
+//        return fileDto;
+//	}
+	
+	/**
+	 * 이미지 전체 조희
+	 */
+//	@Transactional(readOnly = true)
+//    public List<FileDto> findAllByKitchen(Integer kitchenId){
+//
+//        List<KitchenImageEntity> kitchenImageList = kitchenImageRepository.findByFilePath_KitchenId(kitchenId);
+//        // SOMI - 코드 수정
+//        
+//    }
 }

@@ -2,6 +2,7 @@ package com.ourkitchen.data.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,7 +34,7 @@ public class KitchenInfoEntity extends TimeEntity{
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	
 	@Column(name="name", length = 20, nullable = false, unique=true)
 	private String name;
@@ -63,12 +64,12 @@ public class KitchenInfoEntity extends TimeEntity{
 	@JoinColumn(name="user_id", nullable = true)
 	private UserEntity user;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
 	@JoinColumn(name="kitchen_id")
 	private List<KitchenImageEntity> kitchenImages;
 	
 	@Builder
-	public KitchenInfoEntity(Long id, String name, String address, String telNum, String bizReport,
+	public KitchenInfoEntity(Integer id, String name, String address, String telNum, String bizReport,
 			double lat ,double lng, int capacity, int pyeong, UserEntity user, List<KitchenImageEntity> kitchenImages) {
 		this.id = id;
 		this.name = name;
@@ -82,4 +83,6 @@ public class KitchenInfoEntity extends TimeEntity{
 		this.user = user;
 		this.kitchenImages = kitchenImages;
 	}
+	
+
 }

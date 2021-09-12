@@ -25,10 +25,10 @@
 	<table>
 		<tr th:each="kitchenDto : ${kitchenList}">
 			<td>
-				<span th:text="${kitchenDto.id}"></span>
+				<img src="/img/Mesa_001.jpg" style="width:300px;height:auto;">
 			</td>
 			<td>
-				<a th:href="@{'/post/'+${kitchenDto.id}}">
+				<a th:href="@{'/kitchen/'+${kitchenDto.id}}">
 					<span th:text="${kitchenDto.name}"></span>
 				</a>
 			</td>
@@ -38,6 +38,7 @@
 			<td>
 				<button>상세보기</button>
 			</td>
+		</tr>
 	</table>
 	<!-- /LIST -->
 	<!--  PAGING -->

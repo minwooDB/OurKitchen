@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ourkitchen.app.auth.dto.UserDetails;
 import com.ourkitchen.app.kitchen.dto.KitchenDetail;
 import com.ourkitchen.app.kitchen.dto.KitchenDto;
+import com.ourkitchen.app.kitchen.dto.KitchenListDto;
 import com.ourkitchen.app.kitchen.service.FileService;
 import com.ourkitchen.app.kitchen.service.KitchenService;
 import com.ourkitchen.data.entity.KitchenInfoEntity;
@@ -33,7 +35,7 @@ public class KitchenController {
 	private FileService fileService;
 
 	/**
-	 * 주방 조회
+	 * 주방 리스트 조회
 	 * @param model
 	 * @param pageNum
 	 * @return
@@ -41,7 +43,7 @@ public class KitchenController {
 	@GetMapping("/kitchen")
 	public String getKitchenList(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum) {
 log.info("----------kitchenDtoList : {}", "doController");
-		List<KitchenDto> kitchenDtoList = kitchenService.getKitchenList(pageNum);
+		List<KitchenListDto> kitchenDtoList = kitchenService.getKitchenList(pageNum);
 		Integer[] pageList = kitchenService.getPageList(pageNum);
 
 log.info("----------kitchenDtoList : {}", kitchenDtoList);
@@ -70,7 +72,6 @@ log.info("----------kitchenDtoList : {}", kitchenDtoList);
 log.info("----------do KitchenController : addKitchenDetail");
 log.info("----------userDetails: {}", userDetails);
 log.info("----------kitchenDetail : {}", kitchenDetail);
-log.info("----------files : {}", files);
 			/* SOMI - service로 트랜잭션 처리*/
 		KitchenInfoEntity kitchen = kitchenService.addKitchenDetail(userDetails.getUser(), kitchenDetail, files);
 		} catch (Exception e) {
@@ -78,7 +79,28 @@ log.info("----------files : {}", files);
 		}
 		return "redirect:/";
 	}
-
+	
+	/**
+	 * 주방 상세 조회
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/kitchen/{no}")
+	public String getKitchenDetail(@PathVariable("no") Integer id, Model model) {
+		KitchenDetail kitchenDetail = kitchenService.getPost(id);
+		
+		model.addAttribute("kitchenDetil", kitchenDetail);
+		return "kitchen/detail.html";
+	}
+	
+/**
+ * 주방 정보 검색
+ * @param keyword
+ * @param pageNum
+ * @param model
+ * @return
+ */
 	@GetMapping("/kitchen/search")
 	public String search(@RequestParam(value = "keyword") String keyword,
 			@RequestParam(value = "page", defaultValue = "1") Integer pageNum, Model model) {

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>주방 조회</h1>
+	<hr>
+	<!-- DETAIL -->
+	<h3>주방 정보 조회 페이지 입니다.</h3>
+	<hr>
+	<table>
+		<tr>
+			<td>
+				<span>이미지 입니다.</span>
+				<img src="/img/Mesa_001.jpg" style="width:300px;height:auto;">
+			</td>
+			<td>
+				<span th:text="${kitchenDetail.name}"></span>
+			</td>l    
+			<td>
+				<span th:text="${kitchenDetail.address}"></span>
+			</td>
+		</tr>
+	</table>
+	<!-- /LIST -->
+</body>
+</html>

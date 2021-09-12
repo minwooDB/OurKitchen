@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class KitchenDto {
-	private Long id;
+	private Integer id;
 	private String name;
 	private String address;
 	private String telNum;
@@ -36,8 +36,8 @@ public class KitchenDto {
 	}
 
 	@Builder
-	public KitchenDto(Long id, String name, String address, String telNum, String bizReport, double lat, double lng,
-			int capacity, int pyeong, long userId, long imageId) {
+	public KitchenDto(Integer id, String name, String address, String telNum, String bizReport, double lat, double lng,
+			int capacity, int pyeong, Integer userId) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
