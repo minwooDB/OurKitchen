@@ -33,11 +33,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @Table(name="user")
-public class UserEntity {
+public class UserEntity extends TimeEntity{
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	
 	@Column(name="email", length = 255, nullable = false, unique=true)
 	private String email;
@@ -63,7 +63,7 @@ public class UserEntity {
 	private StatusCode active;
 
 	@Builder
-	public UserEntity(Long id, String email, String name, String password, String phoneNum, Role role, StatusCode active, LocalDateTime lastLogin) {
+	public UserEntity(Integer id, String email, String name, String password, String phoneNum, Role role, StatusCode active, LocalDateTime lastLogin) {
 		this.id = id;
 		this.email = email;
 		this.name = name;

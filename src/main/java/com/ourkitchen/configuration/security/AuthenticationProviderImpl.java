@@ -1,25 +1,25 @@
 package com.ourkitchen.configuration.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.ourkitchen.app.auth.dto.UserDetails;
 import com.ourkitchen.app.auth.service.UserDetailsServiceImpl;
 
-import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Component
 public class AuthenticationProviderImpl implements AuthenticationProvider{
-	@Autowired
-	UserDetailsServiceImpl userService;
-	@NonNull
-	private BCryptPasswordEncoder pwdEncoder;
+	
+	private final UserDetailsServiceImpl userService;
+	
+	private final PasswordEncoder passwordEncoder;
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException{
@@ -28,7 +28,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider{
 		String pwd = (String)token.getCredentials();
 		UserDetails userDetailsImpl = (UserDetails) userService.loadUserByUsername(email);
 		
-		if(!pwdEncoder.matches(pwd, userDetailsImpl.getPassword())) {
+		if(!passwordEncoder.matches(userDetailsImpl.getPassword(), pwd)) {
 			throw new BadCredentialsException(userDetailsImpl.getUsername()+" Invaild password");
 		}
 		

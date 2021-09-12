@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" 
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>내정보</title>
+</head>
+<body>
+    <span sec:authentication="principal.user.name"></span>님 반갑습니다.
+    <hr>
+    <a th:href="@{/info/profile}">정보 수정</a>
+    <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/info/reservation}">예약관리</a>
+    <a sec:authorize="hasRole('ROLE_PARTNER')" th:href="@{/info/store}">점포관리</a>
+    <a sec:authorize="hasRole('ROLE_PARTNER')" th:href="@{/info/reservation}">예약관리</a>  
+</body>
+</html>

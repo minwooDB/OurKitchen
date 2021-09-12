@@ -22,7 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class UserDto {
 
-	private Long id;
+	private Integer id;
 	
 	@NotBlank(message="이메일은 필수로 입력해주세요")
 	@Email(message="이메일 형식에 맞지 않는 값입니다.")
@@ -54,4 +54,5 @@ public class UserDto {
 				.build();
 	}
 	
+
 }

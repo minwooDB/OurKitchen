@@ -1,5 +1,6 @@
 package com.ourkitchen.configuration.config;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -16,16 +17,18 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.ourkitchen.data.repository", // TODO Repository ��Ű�� ����
+        basePackages = "com.ourkitchen.data.repository", 
         transactionManagerRef = "mariaDB_transactionManager",
         entityManagerFactoryRef = "mariaDB_entityManagerFactory"
 )
 public class DBConfig {
+	
 	@Primary
 	@Bean(name = "maria_dataSource")
 	@ConfigurationProperties("spring.data.maria")
@@ -52,5 +55,9 @@ public class DBConfig {
 		return transactionManager;
 	}
 	
+	@Bean
+	public JPAQueryFactory jpaQueryFactory(EntityManager entityManager) {
+		return new JPAQueryFactory(entityManager);
+	}
 	
 }

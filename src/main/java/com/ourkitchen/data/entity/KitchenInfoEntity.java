@@ -1,10 +1,18 @@
 package com.ourkitchen.data.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -12,6 +20,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Builder
@@ -20,12 +29,13 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = {"id"})
 @Getter
-@Table(name="kitchen_info")
-public class KitchenInfoEntity {
+@Setter
+@Table(name="Kitchen_info")
+public class KitchenInfoEntity extends TimeEntity{
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	
 	@Column(name="name", length = 20, nullable = false, unique=true)
 	private String name;
@@ -34,10 +44,10 @@ public class KitchenInfoEntity {
 	private String address;
 	
 	@Column(name="tel_num", length = 11, nullable = false)
-	private String tel_num;
+	private String telNum;
 	
 	@Column(name="biz_report", length = 255, nullable = true)
-	private String biz_report;
+	private String bizReport;
 	
 	@Column(name="lat", nullable = false)
 	private double lat;
@@ -51,21 +61,31 @@ public class KitchenInfoEntity {
 	@Column(name="pyeong", nullable = true)
 	private int pyeong;
 	
-	@Column(name="user_id", nullable = false)
-	private long user_id;
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="user_id", nullable = true)
+	private UserEntity user;
+	
+	@OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "kitchenInfo")
+	private List<KitchenImageEntity> kitchenImages = new ArrayList<>();
+	
+	public void setKitchenImages(KitchenImageEntity kitchenImage) {
+		kitchenImages.add(kitchenImage);
+		kitchenImage.setKitchenInfo(this);
+	}
+	
 	@Builder
-	public KitchenInfoEntity(Long id, String name, String address, String tel_num, String biz_report, double lat ,double lng, int capacity, int pyeong, long user_id) {
+	public KitchenInfoEntity(Integer id, String name, String address, String telNum, String bizReport,
+			double lat ,double lng, int capacity, int pyeong, UserEntity user, List<KitchenImageEntity> kitchenImages) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
-		this.tel_num = tel_num;
-		this.biz_report = biz_report;
+		this.telNum = telNum;
+		this.bizReport = bizReport;
 		this.lat = lat;
 		this.lng = lng;
 		this.capacity = capacity;
 		this.pyeong = pyeong;
-		this.user_id = user_id;
+		this.user = user;
+		this.kitchenImages = kitchenImages;
 	}
 }
-

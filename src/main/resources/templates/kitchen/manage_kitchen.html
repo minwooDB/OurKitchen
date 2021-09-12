@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>주방 검색</h1>
+	<hr>
+
+	<!-- SEARCH -->
+	<div id="wrap">
+		<form action="/kitchen/search" method="GET">
+			<div class="search">
+				<input name="keyword" type="text" placeholder="검색어를 입력해주세요.">
+			</div>	
+			<button>검색하기</button>
+		</form>
+	</div>
+	<!-- /SEARCH -->
+	
+	<hr>
+	
+	<!-- LIST -->
+	<table>
+		<tr th:each="kitchenDto : ${kitchenList}">
+			<td>
+				<span th:text="${kitchenDto.id}"></span>
+			</td>
+			<td>
+				<a th:href="@{'/post/'+${kitchenDto.id}}">
+					<span th:text="${kitchenDto.name}"></span>
+				</a>
+			</td>
+			<td>
+				<span th:text="${kitchenDto.address}"></span>
+			</td>
+			<td>
+				<button>상세보기</button>
+			</td>
+	</table>
+	<!-- /LIST -->
+	<!--  PAGING -->
+	<div>
+		<span th:each="pageNum : ${pageList}" th:inline="text">
+			<a th:href="@{'/kitchen/?page='+${pageNum}}">[[${pageNum}]]</a>
+		</span>
+	</div>
+	<!-- /PAGING -->
+
+</body>
+</html>

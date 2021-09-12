@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" 
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>내정보</title>
+    <style>
+    	.cell{
+    		width: 30%;
+    		display: flex;
+    	}
+    	.cell div{
+    		width: 50%;
+    	}
+    </style>
+</head>
+<body>
+    <span sec:authentication="principal.user.name"></span>님 
+	<hr>
+	<form th:action="@{/info/profile}" method="POST" th:object="${member}">
+		<input type="hidden" name="_method" value="PUT">
+		<div class="header" th:text="|${member.role.desc}|">
+		</div>
+		<div class="cell">
+			<div>이메일</div>
+			<div><input type="text" id="email" th:field="*{email}"></div>
+		</div>
+		<div class="cell">
+			<div>이름</div>
+			<div th:text="${member.name}"></div>
+		</div>
+		<div class="cell">
+			<div>전화번호</div>
+			<div><input type="text" id="phoneNum" th:field="*{phoneNum}"></div>
+		</div>
+		<button type="submit" class="">수정</button>
+		<a th:href="@{/info}" class="btn">취소</a>
+		
+	</form>
+    
+</body>
+</html>
