@@ -18,8 +18,6 @@ public class CustomAuthenticationEntryPoint extends LoginUrlAuthenticationEntryP
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
     		AuthenticationException authException) throws IOException, ServletException {
-    	System.out.println("CustomAuthenticationEntryPoint.commence ::::");
-        System.out.println(authException.toString());
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
     	super.commence(request, response, authException);
     }

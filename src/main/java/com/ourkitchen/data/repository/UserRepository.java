@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.ourkitchen.data.entity.UserEntity;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Long>{
+public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 
 	public UserEntity findByEmailAndPassword(String email, String password);
 	

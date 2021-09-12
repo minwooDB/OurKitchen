@@ -9,6 +9,5 @@ import com.ourkitchen.data.entity.KitchenImageEntity;
 
 @Repository
 public interface KitchenImageRepository extends JpaRepository<KitchenImageEntity, Integer>{
-	// List<KitchenImageEntity> findByFilePath_KitchenId(Integer kitchenId);
-	// KitchenImageEntity findByFilePath_ImageId(Integer imageId);
+	
 }

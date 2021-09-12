@@ -100,7 +100,6 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler{
         } else {
             authnExceptionMassage = exception.getMessage();
         }
-        System.out.println(authnExceptionMassage);
         if (this.forwardToDestination) {
             log.debug("Forwarding Attribut : " + WebAttributes.AUTHENTICATION_EXCEPTION);
 

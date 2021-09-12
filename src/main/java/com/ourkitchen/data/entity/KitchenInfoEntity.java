@@ -1,5 +1,6 @@
 package com.ourkitchen.data.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -64,9 +65,14 @@ public class KitchenInfoEntity extends TimeEntity{
 	@JoinColumn(name="user_id", nullable = true)
 	private UserEntity user;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+	@OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 	@JoinColumn(name="kitchen_id")
-	private List<KitchenImageEntity> kitchenImages;
+	private List<KitchenImageEntity> kitchenImages = new ArrayList<>();
+
+	public void setKitchenImages(KitchenImageEntity kitchenImage) {
+		kitchenImages.add(kitchenImage);
+		kitchenImage.setKitchenInfo(this);
+	}
 	
 	@Builder
 	public KitchenInfoEntity(Integer id, String name, String address, String telNum, String bizReport,

@@ -37,7 +37,7 @@ public class KitchenDetail {
 
 	@Builder
 	public KitchenDetail(Integer id, String name, String address, String telNum, String bizReport, double lat, double lng,
-			int capacity, int pyeong, Integer userId) {
+			int capacity, int pyeong, int userId, int imageId) {
 		this.id = id;
 		this.name = name;
 		this.address = address;

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -131,5 +133,20 @@ log.info("----------searchPosts : {}", kitchens);
 	@Transactional
 	public Integer getContentCount() {
 		return (int) kitchenInfoRepository.count();
+	}
+	
+	@Transactional
+	public List<KitchenInfoEntity> findKitchenByUser(UserEntity user){
+		return kitchenInfoRepository.findByUser(user);
+	}
+
+	@Transactional
+	public KitchenInfoEntity findKitchenById(Integer kitchenId) {
+		KitchenInfoEntity kitchen = kitchenInfoRepository.findById(kitchenId)
+				.orElseThrow(() -> new EntityNotFoundException(String.format("kitchen [%s] not found", kitchenId)));
+		if(kitchen.getKitchenImages().size()>0)
+			kitchen.getKitchenImages().get(0);
+		
+		return kitchen;
 	}
 }

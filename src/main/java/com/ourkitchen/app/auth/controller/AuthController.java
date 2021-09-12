@@ -35,7 +35,6 @@ public class AuthController {
 	
 	@PostMapping("/signup")
 	public String signup(@Valid UserDto userDto, BindingResult errors) {
-        System.out.println(userDto.toString());
 		if(errors.hasErrors()) {
             //model.addAttribute("member", userDto);
             //model.addAllAttributes(memAuthService.validateHandling(errors));
@@ -48,7 +47,7 @@ public class AuthController {
 		} catch (UserAlreadyExistsException e) {
 			errors.addError(new ObjectError("error_email", e.getMessage()));
 		}
-		return "main";
+		return "login";
 	}
 	
 }

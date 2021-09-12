@@ -1,8 +1,6 @@
 package com.ourkitchen.app.kitchen.dto;
 
 import com.ourkitchen.data.entity.KitchenImageEntity;
-import com.ourkitchen.data.entity.KitchenInfoEntity;
-import com.ourkitchen.data.repository.KitchenInfoRepository;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -15,8 +13,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class FileDto {
-	private Integer id;
-	private Integer kitchenId;
+	private int id;
+	private int kitchenId;
 	private String orgFileName;
 	private String fileName;
 	private String filePath;
@@ -32,7 +30,7 @@ public class FileDto {
 	}
 	
 	@Builder
-	public FileDto(Integer id, Integer kitchenId, String orgFileName, String fileName, String filePath) {
+	public FileDto(int id, int kitchenId, String orgFileName, String fileName, String filePath) {
 		this.id = id;
 		this.kitchenId = kitchenId;
 		this.orgFileName = orgFileName;
