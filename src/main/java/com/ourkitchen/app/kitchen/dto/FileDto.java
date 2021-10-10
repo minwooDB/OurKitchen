@@ -1,6 +1,7 @@
 package com.ourkitchen.app.kitchen.dto;
 
 import com.ourkitchen.data.entity.KitchenImageEntity;
+import com.ourkitchen.data.entity.KitchenInfoEntity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -37,4 +38,12 @@ public class FileDto {
 		this.fileName = fileName;
 		this.filePath = filePath;
 	}
+	
+	public static FileDto convertEntityToDto(KitchenImageEntity kitchenImage) {
+		return FileDto.builder().id(kitchenImage.getId()).orgFileName(kitchenImage.getOrgFileName())
+				.filePath(kitchenImage.getFilePath()).fileName(kitchenImage.getFileName())
+				.build();
+	}
 }
+
+

@@ -14,9 +14,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ourkitchen.app.kitchen.dto.FileDto;
 import com.ourkitchen.app.kitchen.dto.KitchenDetail;
 import com.ourkitchen.app.kitchen.dto.KitchenDto;
 import com.ourkitchen.app.kitchen.dto.KitchenListDto;
+import com.ourkitchen.data.entity.KitchenImageEntity;
 import com.ourkitchen.data.entity.KitchenInfoEntity;
 import com.ourkitchen.data.entity.UserEntity;
 import com.ourkitchen.data.repository.KitchenInfoRepository;
@@ -97,11 +99,17 @@ log.info("----------searchPosts : {}", kitchens);
 		return kitchenDtoList;
 	}
 
+	/**
+	 * 주방 상세 조회
+	 * @param id
+	 * @return
+	 */
+	@Transactional
 	public KitchenDetail getPost(Integer id) {
 		Optional<KitchenInfoEntity> kitchenWrapper = kitchenInfoRepository.findById(id);
 		KitchenInfoEntity kitchen = kitchenWrapper.get();
-		
 		KitchenDetail kitchenDetail = KitchenDetail.convertEntityToDto(kitchen);
+log.info("----------getPosts : {}", kitchenDetail);
 		return kitchenDetail;
 	}
 	

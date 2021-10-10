@@ -13,16 +13,19 @@
 	<table>
 		<tr>
 			<td>
-				<span>이미지 입니다.</span>
-				<img src="/img/Mesa_001.jpg" style="width:300px;height:auto;">
-			</td>
-			<td>
 				<span th:text="${kitchenDetail.name}"></span>
-			</td>l    
+			</td>
 			<td>
 				<span th:text="${kitchenDetail.address}"></span>
 			</td>
 		</tr>
+		<tr th:each="fileDto: ${fileDtoList}">
+			<td>
+				파일<img src="${fileDto.filePath}" style="width:300px;height:auto;">
+			</td>
+		</tr>
+		
+		
 	</table>
 	<!-- /LIST -->
 </body>

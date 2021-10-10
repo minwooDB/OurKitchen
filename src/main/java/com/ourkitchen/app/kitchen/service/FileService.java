@@ -1,9 +1,10 @@
 package com.ourkitchen.app.kitchen.service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,16 +15,16 @@ import com.ourkitchen.data.entity.KitchenInfoEntity;
 import com.ourkitchen.data.repository.KitchenImageRepository;
 import com.ourkitchen.utils.MD5Generator;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Log4j2
 @Service("fileService")
 public class FileService {
 	
-	private final KitchenImageRepository kitchenImageRepository;
-
+	@Autowired
+	private KitchenImageRepository kitchenImageRepository;
 
 	@Transactional
 	public Integer addKitchenImages(KitchenInfoEntity kitchen, List<MultipartFile> files) {
@@ -96,11 +97,17 @@ log.info("----------imageId : {}", imageId);
 	/**
 	 * 이미지 전체 조희
 	 */
-//	@Transactional(readOnly = true)
-//    public List<FileDto> findAllByKitchen(Integer kitchenId){
-//
-//        List<KitchenImageEntity> kitchenImageList = kitchenImageRepository.findByFilePath_KitchenId(kitchenId);
-//        // SOMI - 코드 수정
-//        
-//    }
+	@Transactional(readOnly = true)
+    public List<FileDto> findAllByKitchen(KitchenInfoEntity kitchen){
+		List<KitchenImageEntity> kitchenImageList = kitchenImageRepository.findAllByKitchenInfo(kitchen);
+        List<FileDto> FileDtoList = new ArrayList<>();
+        
+        if (kitchenImageList.isEmpty())
+        	return FileDtoList;
+        for (KitchenImageEntity kitchenImage : kitchenImageList) {
+			FileDtoList.add(FileDto.convertEntityToDto(kitchenImage));
+			}
+        return FileDtoList;
+        }
+
 }

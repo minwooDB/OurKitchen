@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ourkitchen.app.auth.dto.UserDetails;
+import com.ourkitchen.app.kitchen.dto.FileDto;
 import com.ourkitchen.app.kitchen.dto.KitchenDetail;
 import com.ourkitchen.app.kitchen.dto.KitchenDto;
 import com.ourkitchen.app.kitchen.dto.KitchenListDto;
@@ -89,9 +90,12 @@ log.info("----------kitchenDetail : {}", kitchenDetail);
 	@GetMapping("/kitchen/{no}")
 	public String getKitchenDetail(@PathVariable("no") Integer id, Model model) {
 		KitchenDetail kitchenDetail = kitchenService.getPost(id);
+		List<FileDto> fileDtoList = fileService.findAllByKitchen(kitchenService.findKitchenById(id));
 		
-		model.addAttribute("kitchenDetil", kitchenDetail);
-		return "kitchen/detail.html";
+		model.addAttribute("kitchenDetail", kitchenDetail);
+		model.addAttribute("fileDtoList",fileDtoList);
+log.info("fileDtoList : {}", fileDtoList);
+		return "kitchen/post.html";
 	}
 	
 /**

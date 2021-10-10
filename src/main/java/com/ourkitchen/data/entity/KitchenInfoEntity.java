@@ -89,6 +89,5 @@ public class KitchenInfoEntity extends TimeEntity{
 		this.user = user;
 		this.kitchenImages = kitchenImages;
 	}
-	
 
 }
