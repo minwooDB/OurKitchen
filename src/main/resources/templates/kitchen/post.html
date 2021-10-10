@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-	<h1>주방 조회</h1>
-	<hr>
 	<!-- DETAIL -->
-	<h3>주방 정보 조회 페이지 입니다.</h3>
+	<h2><span th:text="${kitchenDetail.name}"></span></h2>
+	<a th:href="@{|/reservation/${kitchenDetail.id}|}" class="btn" sec:authorize="hasRole('ROLE_USER')">예약</a>
 	<hr>
 	<table>
-		<tr>
-			<td>
-				<span th:text="${kitchenDetail.name}"></span>
-			</td>
-			<td>
-				<span th:text="${kitchenDetail.address}"></span>
-			</td>
-		</tr>
 		<tr th:each="fileDto: ${fileDtoList}">
 			<td>
 				파일<img src="${fileDto.filePath}" style="width:300px;height:auto;">
 			</td>
 		</tr>
-		
-		
+		<tr>
+			<td>주소</td>
+			<td th:text="${kitchenDetail.address}"></td>
+		</tr>
+		<tr>
+			<td>매장 전화번호</td>
+			<td th:text="${kitchenDetail.telNum}"></td>
+		</tr>
+		<tr>
+			<td>주방 수</td>
+			<td th:text="${kitchenDetail.capacity}"></td>
+		</tr>
+		<tr>
+			<td>평 수</td>
+			<td th:text="${kitchenDetail.pyeong}"></td>
+		</tr>
 	</table>
 	<!-- /LIST -->
 </body>
