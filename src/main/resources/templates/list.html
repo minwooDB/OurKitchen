@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>개요정보</title>
+</head>
+<tbody>
+	<tr th:each="board :  ${analysisList}">
+		<td>
+			<span th:text="${analysis.id}"></span>
+		</td>
+		<td>
+			<a th:href="@{'/post' + ${analysis.id}}">
+				<span th:text="${analysis.tradingarea_name}"></span>
+			</a>
+		</td>
+		<td>
+			<span th:text="${analysis.resident_pop_most}"></span>
+		</td>
+		<td>
+			<span th:text="${analysis.economic_pop_most}"></span>
+		</td>	
+		<td>
+			<span th:text="${analysis.floating_pop_most}"></span>
+		</td>
+		<td>
+			<span th:text="${analysis.apartment_area_most}"></span>
+		</td>
+		<td>
+			<span th:text="${analysis.apartment_area_avg}"></span>
+		</td>
+		<td>
+			<span th:text="${analysis.apartment_price_most}"></span>
+		</td>
+		<td>
+			<span th:text="${analysis.apartment_price_avg}"></span>
+		</td>	
+		<td>
+			<span th:text="${analysis.facilities_most}"></span>
+		</td>	                                   
+	</tr>	                                                                                                                                        "
+</tbody>
+</html>

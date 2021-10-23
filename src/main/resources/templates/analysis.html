@@ -2,67 +2,31 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-<title>분석 결과</title>
 </head>
-<body>
-	<h1>주방 검색</h1>
-	<hr>
+<script>
 
-	<div id="wrap">
-		<form action="/analysis" method="GET">
-			<div class="search">
-				<dl>
-				   <dt>Menu 1</dt>
-				   <dd>
-				     커피 및 음료
-				   </dd>
-				   <dt>Menu 2</dt>
-				   <dd class="hidden">
-				      분식전문점
-				   </dd>
-				   <dt>Menu 3</dt>
-				   <dd class="hidden">
-				      패스트푸드점
-				   </dd>
-				   <dd class="hidden">
-				      제과점
-				   </dd>
-				   <dd class="hidden">
-				      양식음식점
-				   </dd>
-				   <dd class="hidden">
-				      일식음식점
-				   </dd>
-				   <dd class="hidden">
-				      중식음식점
-				   </dd>
-				   <dd class="hidden">
-				      한식음식점
-				   </dd>			   
-				</dl>
-			</div>
-			<button>검색하기</button>
-		</form>
-	</div>
-	<!-- /SEARCH -->
-	
-	<hr>
-	
-	<!-- LIST -->
-	<table>
-		<tr th:each="analysisDto : ${analysisList}">
-			<td>
-				<span th:text="${analysisDto.id}"></span>
-			</td>
-			<td>
-				<a th:href="@{'/post/'+${analysisDto.id}}">
-					<span th:text="${analysisDto.name}"></span>
-				</a>
-			</td>
-			<td>
-				<button>상세보기</button>
-			</td>
-	</table>
+	$(document).on('click', '#btnWriteForm', function(e){
 
-</body>
+		e.preventDefault();
+
+		
+
+		location.href = "${pageContext.request.contextPath}/board/boardForm";
+
+	});
+
+	
+
+	function fn_contentView(bid){
+
+		var url = "${pageContext.request.contextPath}/board/getBoardContent";
+
+		url = url + "?bid="+bid;
+
+		location.href = url;
+
+	}
+
+</script>
+
 </html>

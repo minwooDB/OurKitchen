@@ -25,16 +25,16 @@ import lombok.ToString;
 @Entity
 @NoArgsConstructor(access=AccessLevel.PROTECTED)
 @ToString
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = {"GuId"})
 @Getter
 @Setter
 @Table(name="Preview_info2")
   
-public class AnalysisInfoEntity2{
+public class GuInfoEntity{
   @Id
-  @Column(name="id")
+  @Column(name="GuId")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private int GuId;
   
   @Column(name="gu_code", length = 20, nullable = false) private
   int gu_code;
@@ -70,9 +70,9 @@ public class AnalysisInfoEntity2{
   private int gu_total_floating_pop_women;
   
 @Builder
-public AnalysisInfoEntity2(int id, int gu_code, String gu_name, int gu_total_resident_pop, int gu_total_resident_pop_men, int gu_total_resident_pop_women,
+public GuInfoEntity(int GuId, int gu_code, String gu_name, int gu_total_resident_pop, int gu_total_resident_pop_men, int gu_total_resident_pop_women,
 	   int gu_total_economic_pop, int gu_total_economic_pop_men, int gu_total_economic_pop_women, int gu_total_floating_pop, int gu_total_floating_pop_men, int gu_total_floating_pop_women) {
-		this.id = id;
+		this.GuId = GuId;
 		this.gu_code = gu_code;
 		this.gu_name = gu_name;
 		this.gu_total_resident_pop = gu_total_resident_pop;
